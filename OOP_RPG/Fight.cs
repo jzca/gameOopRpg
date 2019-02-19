@@ -13,13 +13,14 @@ namespace OOP_RPG
             Hero = hero;
             Monsters = new List<Monster>();
 
-            AddMonster("Squid", 15, 5, 20);
+            AddMonster("Medium", "Squid", 15, 5, 20);
         }
 
-        private void AddMonster(string name, int strength, int defense, int hp)
+        private void AddMonster(string difficulty, string name, int strength, int defense, int hp)
         {
-            var monster = new Monster();
+            var monster = new Monster(difficulty, name, strength, defense, hp);
 
+            monster.Difficulty = difficulty;
             monster.Name = name;
             monster.Strength = strength;
             monster.Defense = defense;
@@ -28,6 +29,7 @@ namespace OOP_RPG
 
             Monsters.Add(monster);
         }
+
 
         public void Start()
         {
