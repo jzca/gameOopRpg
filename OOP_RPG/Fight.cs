@@ -8,9 +8,9 @@ namespace OOP_RPG
         private List<Monster> Monsters { get; }
         private Hero Hero { get; }
 
-        public Fight(Hero game)
+        public Fight(Hero hero)
         {
-            Hero = game;
+            Hero = hero;
             Monsters = new List<Monster>();
 
             AddMonster("Squid", 15, 5, 20);
