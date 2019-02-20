@@ -9,6 +9,8 @@ namespace OOP_RPG
         private List<Monster> Monsters { get; }
         private Hero Hero { get; }
         private Monster Enemy { get; set; }
+        private int Damage { get; set; }
+        private int Compare { get; set; }
 
         public Fight(Hero hero)
         {
@@ -145,21 +147,20 @@ namespace OOP_RPG
 
         private void HeroTurn()
         {
-            var compare = Hero.Strength - Enemy.Defense;
-            int damage;
+            Compare = Hero.Strength - Enemy.Defense;
 
-            if (compare <= 0)
+            if (Compare <= 0)
             {
-                damage = 1;
-                Enemy.CurrentHP -= damage;
+                Damage = 1;
+                Enemy.CurrentHP -= Damage;
             }
             else
             {
-                damage = compare;
-                Enemy.CurrentHP -= damage;
+                Damage = Compare;
+                Enemy.CurrentHP -= Damage;
             }
 
-            Console.WriteLine("You did " + damage + " damage!");
+            Console.WriteLine("You did " + Damage + " damage!");
 
             if (Enemy.CurrentHP <= 0)
             {
@@ -173,21 +174,20 @@ namespace OOP_RPG
 
         private void MonsterTurn()
         {
-            int damage;
-            var compare = Enemy.Strength - Hero.Defense;
+            Compare = Enemy.Strength - Hero.Defense;
 
-            if (compare <= 0)
+            if (Compare <= 0)
             {
-                damage = 1;
-                Hero.CurrentHP -= damage;
+                Damage = 1;
+                Hero.CurrentHP -= Damage;
             }
             else
             {
-                damage = compare;
-                Hero.CurrentHP -= damage;
+                Damage = Compare;
+                Hero.CurrentHP -= Damage;
             }
 
-            Console.WriteLine(Enemy.Name + " does " + damage + " damage!");
+            Console.WriteLine(Enemy.Name + " does " + Damage + " damage!");
 
             if (Hero.CurrentHP <= 0)
             {
