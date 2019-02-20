@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OOP_RPG
 {
     public class Fight
     {
-        public List<Monster> Monsters { get; }
+        private List<Monster> Monsters { get; }
         private Hero Hero { get; }
         private Monster Enemy { get; set; }
 
@@ -81,6 +82,11 @@ namespace OOP_RPG
             AddMonster("Medium", "Sandslash", 20, 10, 25);
             AddMonster("Medium", "Nidoran", 20, 10, 25);
             AddMonster("Hard", "Ninetales", 25, 15, 30);
+
+            if (Monsters.Count != 35)
+            {
+                throw new AmtOfMonsterException("Opps. There should be 35 monsters");
+            }
 
             Random random = new Random();
             var todayIs = DateTime.Today.DayOfWeek;
