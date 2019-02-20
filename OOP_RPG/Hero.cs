@@ -28,10 +28,10 @@ namespace OOP_RPG
         {
             ArmorsBag = new List<Armor>();
             WeaponsBag = new List<Weapon>();
-            Strength = 10;
-            Defense = 10;
+            Strength = 15;
+            Defense = 15;
             OriginalHP = 30;
-            CurrentHP = 30;
+            CurrentHP = 100;
         }
 
         //These are the Methods of our Class.
