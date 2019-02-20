@@ -15,25 +15,6 @@ namespace OOP_RPG
         {
             Hero = hero;
             Monsters = new List<Monster>();
-        }
-
-        public void AddMonster(string difficulty, string name, int strength, int defense, int hp)
-        {
-            var monster = new Monster(difficulty, name, strength, defense, hp);
-
-            monster.Difficulty = difficulty;
-            monster.Name = name;
-            monster.Strength = strength;
-            monster.Defense = defense;
-            monster.OriginalHP = hp;
-            monster.CurrentHP = hp;
-
-            Monsters.Add(monster);
-        }
-
-
-        public void Start()
-        {
 
             // Monday
             AddMonster("Easy", "Bulbasaur", 15, 5, 20);
@@ -84,7 +65,27 @@ namespace OOP_RPG
             AddMonster("Medium", "Nidoran", 20, 10, 25);
             AddMonster("Hard", "Ninetales", 25, 15, 30);
 
-            if (Monsters.Count != 35)
+        }
+
+        public void AddMonster(string difficulty, string name, int strength, int defense, int hp)
+        {
+            var monster = new Monster(difficulty, name, strength, defense, hp);
+
+            monster.Difficulty = difficulty;
+            monster.Name = name;
+            monster.Strength = strength;
+            monster.Defense = defense;
+            monster.OriginalHP = hp;
+            monster.CurrentHP = hp;
+
+            Monsters.Add(monster);
+        }
+
+
+        public void Start()
+        {
+
+              if (Monsters.Count != 35)
             {
                 throw new AmtOfMonsterException("Opps. There should be 35 monsters");
             }
@@ -207,22 +208,3 @@ namespace OOP_RPG
         }
     }
 }
-
-
-//// Test Random Q5P1 
-//int rdNum1 = random.Next(0, 5);
-//int rdNum2 = random.Next(5, 10);
-//int rdNum3 = random.Next(10, 15);
-//int rdNum4 = random.Next(15, 20);
-//int rdNum5 = random.Next(20, 25);
-//int rdNum6 = random.Next(25, 30);
-//int rdNum7 = random.Next(30, 35);
-//Console.WriteLine(rdNum1);
-//Console.WriteLine(rdNum2);
-//Console.WriteLine(rdNum3);
-//Console.WriteLine(rdNum4);
-//Console.WriteLine(rdNum5);
-//Console.WriteLine(rdNum6);
-//Console.WriteLine(random.Next(5, 10));
-//Console.WriteLine(random.Next(5, 10));
-// Extra: AddMonster("Medium", "Nidorina", 20, 10, 25);
