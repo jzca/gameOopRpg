@@ -13,48 +13,6 @@ namespace OOP_RPG
         {
             Hero = hero;
             Monsters = new List<Monster>();
-
-            AddMonster("Easy", "Bulbasaur", 15, 5, 20);
-            AddMonster("Easy", "Ivysaur", 15, 5, 20);
-            AddMonster("Easy", "Venusaur", 15, 5, 20);
-            AddMonster("Easy", "Charmander", 15, 5, 20);
-            AddMonster("Easy", "Charmeleon", 15, 5, 20);
-            AddMonster("Easy", "Charizard", 15, 5, 20);
-            AddMonster("Easy", "Squirtle", 15, 5, 20);
-            AddMonster("Easy", "Wartortle", 15, 5, 20);
-            AddMonster("Easy", "Blastoise", 15, 5, 20);
-            AddMonster("Easy", "Metapod", 15, 5, 20);
-            AddMonster("Easy", "Butterfree", 15, 5, 20);
-            AddMonster("Easy", "Weedle", 15, 5, 20);
-            AddMonster("Easy", "Kakuna", 15, 5, 20);
-            AddMonster("Easy", "Beedrill", 15, 5, 20);
-            AddMonster("Medium", "Pidgey", 20, 10, 25);
-            AddMonster("Medium", "Pidgeotto", 20, 10, 25);
-            AddMonster("Medium", "Pidgeot", 20, 10, 25);
-            AddMonster("Medium", "Rattata", 20, 10, 25);
-            AddMonster("Medium", "Raticate", 20, 10, 25);
-            AddMonster("Medium", "Spearow", 20, 10, 25);
-            AddMonster("Medium", "Fearow", 20, 10, 25);
-            AddMonster("Medium", "Ekans", 20, 10, 25);
-            AddMonster("Medium", "Arbok", 20, 10, 25);
-            AddMonster("Medium", "Pikachu", 20, 10, 25);
-            AddMonster("Medium", "Raichu", 20, 10, 25);
-            AddMonster("Medium", "Sandshrew", 20, 10, 25);
-            AddMonster("Medium", "Sandslash", 20, 10, 25);
-            AddMonster("Medium", "Nidoran", 20, 10, 25);
-            AddMonster("Medium", "Nidorina", 20, 10, 25);
-            AddMonster("Hard", "Nidoqueen", 25, 15, 30);
-            AddMonster("Hard", "Nidorino", 25, 15, 30);
-            AddMonster("Hard", "Nidoking", 25, 15, 30);
-            AddMonster("Hard", "Clefairy", 25, 15, 30);
-            AddMonster("Hard", "Clefable", 25, 15, 30);
-            AddMonster("Hard", "Vulpix", 25, 15, 30);
-            AddMonster("Hard", "Ninetales", 25, 15, 30);
-
-            Random random = new Random();
-            int randomNumber = random.Next(0, 35);
-            Enemy = Monsters[randomNumber];
-
         }
 
         public void AddMonster(string difficulty, string name, int strength, int defense, int hp)
@@ -75,6 +33,93 @@ namespace OOP_RPG
         public void Start()
         {
 
+            // Monday
+            AddMonster("Easy", "Bulbasaur", 15, 5, 20);
+            AddMonster("Easy", "Ivysaur", 15, 5, 20);
+            AddMonster("Medium", "Pidgey", 20, 10, 25);
+            AddMonster("Medium", "Pidgeotto", 20, 10, 25);
+            AddMonster("Hard", "Nidoqueen", 25, 15, 30);
+
+            //Tuesday
+            AddMonster("Easy", "Venusaur", 15, 5, 20);
+            AddMonster("Easy", "Charmander", 15, 5, 20);
+            AddMonster("Medium", "Pidgeot", 20, 10, 25);
+            AddMonster("Medium", "Rattata", 20, 10, 25);
+            AddMonster("Hard", "Nidorino", 25, 15, 30);
+
+            //Wednesday
+            AddMonster("Easy", "Charmeleon", 15, 5, 20);
+            AddMonster("Easy", "Charizard", 15, 5, 20);
+            AddMonster("Medium", "Raticate", 20, 10, 25);
+            AddMonster("Medium", "Spearow", 20, 10, 25);
+            AddMonster("Hard", "Nidoking", 25, 15, 30);
+
+            //Thursday
+            AddMonster("Easy", "Squirtle", 15, 5, 20);
+            AddMonster("Easy", "Wartortle", 15, 5, 20);
+            AddMonster("Medium", "Fearow", 20, 10, 25);
+            AddMonster("Medium", "Ekans", 20, 10, 25);
+            AddMonster("Hard", "Clefairy", 25, 15, 30);
+
+            //Friday
+            AddMonster("Easy", "Blastoise", 15, 5, 20);
+            AddMonster("Easy", "Metapod", 15, 5, 20);
+            AddMonster("Medium", "Arbok", 20, 10, 25);
+            AddMonster("Medium", "Pikachu", 20, 10, 25);
+            AddMonster("Hard", "Clefable", 25, 15, 30);
+
+            //Saturday
+            AddMonster("Easy", "Butterfree", 15, 5, 20);
+            AddMonster("Easy", "Weedle", 15, 5, 20);
+            AddMonster("Medium", "Raichu", 20, 10, 25);
+            AddMonster("Medium", "Sandshrew", 20, 10, 25);
+            AddMonster("Hard", "Vulpix", 25, 15, 30);
+
+            //Sunday
+            AddMonster("Easy", "Kakuna", 15, 5, 20);
+            AddMonster("Easy", "Beedrill", 15, 5, 20);
+            AddMonster("Medium", "Sandslash", 20, 10, 25);
+            AddMonster("Medium", "Nidoran", 20, 10, 25);
+            AddMonster("Hard", "Ninetales", 25, 15, 30);
+
+            Random random = new Random();
+            var todayIs = DateTime.Today.DayOfWeek;
+            var todayMon = DayOfWeek.Monday;
+            var todayTue = DayOfWeek.Tuesday;
+            var todayWed = DayOfWeek.Wednesday;
+            var todayThu = DayOfWeek.Thursday;
+            var todayFri = DayOfWeek.Friday;
+            var todaySat = DayOfWeek.Saturday;
+            var todaySun = DayOfWeek.Sunday;
+
+            if (todayIs == todayMon)
+            {
+                Enemy = Monsters[random.Next(0, 5)];
+            }
+            else if (todayIs == todayTue)
+            {
+                Enemy = Monsters[random.Next(5, 10)];
+            }
+            else if (todayIs == todayWed)
+            {
+                Enemy = Monsters[random.Next(10, 15)];
+            }
+            else if (todayIs == todayThu)
+            {
+                Enemy = Monsters[random.Next(15, 20)];
+            }
+            else if (todayIs == todayFri)
+            {
+                Enemy = Monsters[random.Next(20, 25)];
+            }
+            else if (todayIs == todaySat)
+            {
+                Enemy = Monsters[random.Next(25, 30)];
+            }
+            else if (todayIs == todaySun)
+            {
+                Enemy = Monsters[random.Next(30, 35)];
+            }
 
             while (Enemy.CurrentHP > 0 && Hero.CurrentHP > 0)
             {
@@ -157,3 +202,22 @@ namespace OOP_RPG
         }
     }
 }
+
+
+//// Test Random Q5P1 
+//int rdNum1 = random.Next(0, 5);
+//int rdNum2 = random.Next(5, 10);
+//int rdNum3 = random.Next(10, 15);
+//int rdNum4 = random.Next(15, 20);
+//int rdNum5 = random.Next(20, 25);
+//int rdNum6 = random.Next(25, 30);
+//int rdNum7 = random.Next(30, 35);
+//Console.WriteLine(rdNum1);
+//Console.WriteLine(rdNum2);
+//Console.WriteLine(rdNum3);
+//Console.WriteLine(rdNum4);
+//Console.WriteLine(rdNum5);
+//Console.WriteLine(rdNum6);
+//Console.WriteLine(random.Next(5, 10));
+//Console.WriteLine(random.Next(5, 10));
+// Extra: AddMonster("Medium", "Nidorina", 20, 10, 25);

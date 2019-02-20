@@ -28,9 +28,9 @@ namespace OOP_RPG
         {
             ArmorsBag = new List<Armor>();
             WeaponsBag = new List<Weapon>();
-            Strength = 15;
-            Defense = 15;
-            OriginalHP = 30;
+            Strength = 30;
+            Defense = 20;
+            OriginalHP = 100;
             CurrentHP = 100;
         }
 
