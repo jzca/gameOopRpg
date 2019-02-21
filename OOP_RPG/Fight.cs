@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace OOP_RPG
 {
@@ -16,118 +17,79 @@ namespace OOP_RPG
             Hero = hero;
             Monsters = new List<Monster>();
 
+            #region AddMonsters
             // Monday
-            AddMonster("Easy", "Bulbasaur", 15, 5, 20);
-            AddMonster("Easy", "Ivysaur", 15, 5, 20);
-            AddMonster("Medium", "Pidgey", 20, 10, 25);
-            AddMonster("Medium", "Pidgeotto", 20, 10, 25);
-            AddMonster("Hard", "Nidoqueen", 25, 15, 30);
-
+            AddMonster(DayOfWeek.Monday, DifficultyLevel.Easy, "Bulbasaur", 15, 5, 20);
+            AddMonster(DayOfWeek.Monday, DifficultyLevel.Easy, "Ivysaur", 15, 5, 20);
+            AddMonster(DayOfWeek.Monday, DifficultyLevel.Medium, "Pidgey", 20, 10, 25);
+            AddMonster(DayOfWeek.Monday, DifficultyLevel.Medium, "Pidgeotto", 20, 10, 25);
+            AddMonster(DayOfWeek.Monday, DifficultyLevel.Hard, "Nidoqueen", 25, 15, 30);
+                                      
             //Tuesday
-            AddMonster("Easy", "Venusaur", 15, 5, 20);
-            AddMonster("Easy", "Charmander", 15, 5, 20);
-            AddMonster("Medium", "Pidgeot", 20, 10, 25);
-            AddMonster("Medium", "Rattata", 20, 10, 25);
-            AddMonster("Hard", "Nidorino", 25, 15, 30);
+            AddMonster(DayOfWeek.Tuesday, DifficultyLevel.Easy, "Venusaur", 15, 5, 20);
+            AddMonster(DayOfWeek.Tuesday, DifficultyLevel.Easy, "Charmander", 15, 5, 20);
+            AddMonster(DayOfWeek.Tuesday, DifficultyLevel.Medium, "Pidgeot", 20, 10, 25);
+            AddMonster(DayOfWeek.Tuesday, DifficultyLevel.Medium, "Rattata", 20, 10, 25);
+            AddMonster(DayOfWeek.Tuesday, DifficultyLevel.Hard, "Nidorino", 25, 15, 30);
 
             //Wednesday
-            AddMonster("Easy", "Charmeleon", 15, 5, 20);
-            AddMonster("Easy", "Charizard", 15, 5, 20);
-            AddMonster("Medium", "Raticate", 20, 10, 25);
-            AddMonster("Medium", "Spearow", 20, 10, 25);
-            AddMonster("Hard", "Nidoking", 25, 15, 30);
+            AddMonster(DayOfWeek.Wednesday, DifficultyLevel.Easy, "Charmeleon", 15, 5, 20);
+            AddMonster(DayOfWeek.Wednesday, DifficultyLevel.Easy, "Charizard", 15, 5, 20);
+            AddMonster(DayOfWeek.Wednesday, DifficultyLevel.Medium, "Raticate", 20, 10, 25);
+            AddMonster(DayOfWeek.Wednesday, DifficultyLevel.Medium, "Spearow", 20, 10, 25);
+            AddMonster(DayOfWeek.Wednesday, DifficultyLevel.Hard, "Nidoking", 25, 15, 30);
 
             //Thursday
-            AddMonster("Easy", "Squirtle", 15, 5, 20);
-            AddMonster("Easy", "Wartortle", 15, 5, 20);
-            AddMonster("Medium", "Fearow", 20, 10, 25);
-            AddMonster("Medium", "Ekans", 20, 10, 25);
-            AddMonster("Hard", "Clefairy", 25, 15, 30);
+            AddMonster(DayOfWeek.Thursday, DifficultyLevel.Easy, "Squirtle", 15, 5, 20);
+            AddMonster(DayOfWeek.Thursday, DifficultyLevel.Easy, "Wartortle", 15, 5, 20);
+            AddMonster(DayOfWeek.Thursday, DifficultyLevel.Medium, "Fearow", 20, 10, 25);
+            AddMonster(DayOfWeek.Thursday, DifficultyLevel.Medium, "Ekans", 20, 10, 25);
+            AddMonster(DayOfWeek.Thursday, DifficultyLevel.Hard, "Clefairy", 25, 15, 30);
 
             //Friday
-            AddMonster("Easy", "Blastoise", 15, 5, 20);
-            AddMonster("Easy", "Metapod", 15, 5, 20);
-            AddMonster("Medium", "Arbok", 20, 10, 25);
-            AddMonster("Medium", "Pikachu", 20, 10, 25);
-            AddMonster("Hard", "Clefable", 25, 15, 30);
+            AddMonster(DayOfWeek.Friday, DifficultyLevel.Easy, "Blastoise", 15, 5, 20);
+            AddMonster(DayOfWeek.Friday, DifficultyLevel.Easy, "Metapod", 15, 5, 20);
+            AddMonster(DayOfWeek.Friday, DifficultyLevel.Medium, "Arbok", 20, 10, 25);
+            AddMonster(DayOfWeek.Friday, DifficultyLevel.Medium, "Pikachu", 20, 10, 25);
+            AddMonster(DayOfWeek.Friday, DifficultyLevel.Hard, "Clefable", 25, 15, 30);
 
             //Saturday
-            AddMonster("Easy", "Butterfree", 15, 5, 20);
-            AddMonster("Easy", "Weedle", 15, 5, 20);
-            AddMonster("Medium", "Raichu", 20, 10, 25);
-            AddMonster("Medium", "Sandshrew", 20, 10, 25);
-            AddMonster("Hard", "Vulpix", 25, 15, 30);
+            AddMonster(DayOfWeek.Saturday, DifficultyLevel.Easy, "Butterfree", 15, 5, 20);
+            AddMonster(DayOfWeek.Saturday, DifficultyLevel.Easy, "Weedle", 15, 5, 20);
+            AddMonster(DayOfWeek.Saturday, DifficultyLevel.Medium, "Raichu", 20, 10, 25);
+            AddMonster(DayOfWeek.Saturday, DifficultyLevel.Medium, "Sandshrew", 20, 10, 25);
+            AddMonster(DayOfWeek.Saturday, DifficultyLevel.Hard, "Vulpix", 25, 15, 30);
 
             //Sunday
-            AddMonster("Easy", "Kakuna", 15, 5, 20);
-            AddMonster("Easy", "Beedrill", 15, 5, 20);
-            AddMonster("Medium", "Sandslash", 20, 10, 25);
-            AddMonster("Medium", "Nidoran", 20, 10, 25);
-            AddMonster("Hard", "Ninetales", 25, 15, 30);
-
+            AddMonster(DayOfWeek.Sunday, DifficultyLevel.Easy, "Kakuna", 15, 5, 20);
+            AddMonster(DayOfWeek.Sunday, DifficultyLevel.Easy, "Beedrill", 15, 5, 20);
+            AddMonster(DayOfWeek.Sunday, DifficultyLevel.Medium, "Sandslash", 20, 10, 25);
+            AddMonster(DayOfWeek.Sunday, DifficultyLevel.Medium, "Nidoran", 20, 10, 25);
+            AddMonster(DayOfWeek.Sunday, DifficultyLevel.Hard, "Ninetales", 25, 15, 30);
+            #endregion
         }
-
-        public void AddMonster(string difficulty, string name, int strength, int defense, int hp)
+    
+        public void AddMonster(DayOfWeek respawnDay, DifficultyLevel difficulty, string name, int strength, int defense, int hp)
         {
-            var monster = new Monster(difficulty, name, strength, defense, hp);
-
-            monster.Difficulty = difficulty;
-            monster.Name = name;
-            monster.Strength = strength;
-            monster.Defense = defense;
-            monster.OriginalHP = hp;
-            monster.CurrentHP = hp;
+            var monster = new Monster(respawnDay, difficulty, name, strength, defense, hp);
 
             Monsters.Add(monster);
         }
 
-
         public void Start()
         {
 
-            if (Monsters.Count != 35)
+            if (Monsters.Count == 35)
             {
-                throw new AmtOfMonsterException("Opps. There should be 35 monsters");
+                throw new AmtOfMonsterException("Opps. There must be 35 monsters");
             }
 
-            Random random = new Random();
             var todayIs = DateTime.Today.DayOfWeek;
-            var todayMon = DayOfWeek.Monday;
-            var todayTue = DayOfWeek.Tuesday;
-            var todayWed = DayOfWeek.Wednesday;
-            var todayThu = DayOfWeek.Thursday;
-            var todayFri = DayOfWeek.Friday;
-            var todaySat = DayOfWeek.Saturday;
-            var todaySun = DayOfWeek.Sunday;
 
-            if (todayIs == todayMon)
-            {
-                Enemy = Monsters[random.Next(0, 5)];
-            }
-            else if (todayIs == todayTue)
-            {
-                Enemy = Monsters[random.Next(5, 10)];
-            }
-            else if (todayIs == todayWed)
-            {
-                Enemy = Monsters[random.Next(10, 15)];
-            }
-            else if (todayIs == todayThu)
-            {
-                Enemy = Monsters[random.Next(15, 20)];
-            }
-            else if (todayIs == todayFri)
-            {
-                Enemy = Monsters[random.Next(20, 25)];
-            }
-            else if (todayIs == todaySat)
-            {
-                Enemy = Monsters[random.Next(25, 30)];
-            }
-            else if (todayIs == todaySun)
-            {
-                Enemy = Monsters[random.Next(30, 35)];
-            }
+            Enemy = (from m in Monsters
+                     where m.RespawnDay == todayIs
+                     orderby Guid.NewGuid().ToString()
+                     select m).First();
 
             while (Enemy.CurrentHP > 0 && Hero.CurrentHP > 0)
             {
