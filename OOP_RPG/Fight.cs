@@ -85,7 +85,7 @@ namespace OOP_RPG
         public void Start()
         {
 
-              if (Monsters.Count != 35)
+            if (Monsters.Count != 35)
             {
                 throw new AmtOfMonsterException("Opps. There should be 35 monsters");
             }
