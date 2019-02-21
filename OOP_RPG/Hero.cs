@@ -17,6 +17,9 @@ namespace OOP_RPG
         public List<Armor> ArmorsBag { get; set; }
         public List<Weapon> WeaponsBag { get; set; }
 
+        // Additions
+        public int Balance { get; set; }
+
         /*This is a Constructor.
         When we create a new object from our Hero class, the instance of this class, our hero, has:
         an empty List that has to contain instances of the Armor class,
@@ -32,6 +35,7 @@ namespace OOP_RPG
             Defense = 20;
             OriginalHP = 35;
             CurrentHP = 35;
+            Balance = 0;
         }
 
         //These are the Methods of our Class.
@@ -41,6 +45,7 @@ namespace OOP_RPG
             Console.WriteLine("Strength: " + this.Strength);
             Console.WriteLine("Defense: " + this.Defense);
             Console.WriteLine("Hitpoints: " + this.CurrentHP + "/" + this.OriginalHP);
+            Console.WriteLine("Balance: " + this.Balance);
         }
 
         public void ShowInventory()

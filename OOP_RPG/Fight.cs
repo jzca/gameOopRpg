@@ -11,6 +11,7 @@ namespace OOP_RPG
         private Monster Enemy { get; set; }
         private int Damage { get; set; }
         private int Compare { get; set; }
+        private int TrophyEarned { get; set; }
 
         public Fight(Hero hero)
         {
@@ -24,7 +25,7 @@ namespace OOP_RPG
             AddMonster(DayOfWeek.Monday, DifficultyLevel.Medium, "Pidgey", 20, 10, 25);
             AddMonster(DayOfWeek.Monday, DifficultyLevel.Medium, "Pidgeotto", 20, 10, 25);
             AddMonster(DayOfWeek.Monday, DifficultyLevel.Hard, "Nidoqueen", 25, 15, 30);
-                                      
+
             //Tuesday
             AddMonster(DayOfWeek.Tuesday, DifficultyLevel.Easy, "Venusaur", 15, 5, 20);
             AddMonster(DayOfWeek.Tuesday, DifficultyLevel.Easy, "Charmander", 15, 5, 20);
@@ -68,7 +69,7 @@ namespace OOP_RPG
             AddMonster(DayOfWeek.Sunday, DifficultyLevel.Hard, "Ninetales", 25, 15, 30);
             #endregion
         }
-    
+
         public void AddMonster(DayOfWeek respawnDay, DifficultyLevel difficulty, string name, int strength, int defense, int hp)
         {
             var monster = new Monster(respawnDay, difficulty, name, strength, defense, hp);
@@ -79,7 +80,7 @@ namespace OOP_RPG
         public void Start()
         {
 
-            if (Monsters.Count == 35)
+            if (Monsters.Count != 35)
             {
                 throw new AmtOfMonsterException("Opps. There must be 35 monsters");
             }
@@ -159,7 +160,9 @@ namespace OOP_RPG
 
         private void Win()
         {
+            Trophy();
             Console.WriteLine(Enemy.Name + " has been defeated! You win the battle!");
+            Console.WriteLine($"You earned ${TrophyEarned} and your balance is now: ${Hero.Balance}.");
         }
 
         private void Lose()
@@ -167,6 +170,27 @@ namespace OOP_RPG
             Console.WriteLine("You've been defeated! :( GAME OVER.");
             Console.WriteLine("Press any key to exit the game");
             Console.ReadKey();
+        }
+
+        private void Trophy()
+        {
+            Random rdm = new Random();
+
+            if (Enemy.Difficulty == DifficultyLevel.Easy)
+            {
+                TrophyEarned=rdm.Next(1, 11);
+                Hero.Balance = Hero.Balance + TrophyEarned;
+            }
+            else if (Enemy.Difficulty == DifficultyLevel.Medium)
+            {
+                TrophyEarned = rdm.Next(11, 21);
+                Hero.Balance = Hero.Balance + TrophyEarned;
+            }
+            else if (Enemy.Difficulty == DifficultyLevel.Hard)
+            {
+                TrophyEarned = rdm.Next(21, 31);
+                Hero.Balance = Hero.Balance + TrophyEarned;
+            }
         }
     }
 }
