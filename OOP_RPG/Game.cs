@@ -1,14 +1,18 @@
 using System;
+using System.Linq;
 
 namespace OOP_RPG
 {
     public class Game
     {
         public Hero Hero { get; }
+        public Shop Shop { get; }
 
         public Game()
         {
             Hero = new Hero();
+            Shop = new Shop(Hero);
+
         }
 
         public void Start()
@@ -23,17 +27,18 @@ namespace OOP_RPG
             Main();
         }
 
-        private void Main()
+        public void Main()
         {
             var input = "0";
 
-            while (input != "4")
+            while (input != "5")
             {
                 Console.WriteLine("Please choose an option by entering a number.");
                 Console.WriteLine("1. View Stats");
                 Console.WriteLine("2. View Inventory");
                 Console.WriteLine("3. Fight Monster");
-                Console.WriteLine("4. Exit");
+                Console.WriteLine("4. View Jerry's Shop");
+                Console.WriteLine("5. Exit");
 
                 input = Console.ReadLine();
 
@@ -48,6 +53,10 @@ namespace OOP_RPG
                 else if (input == "3")
                 {
                     this.Fight();
+                }
+                else if (input == "4")
+                {
+                    Shop.OpenShop();
                 }
 
                 if (Hero.CurrentHP <= 0)
@@ -79,5 +88,12 @@ namespace OOP_RPG
 
             fight.Start();
         }
+
+
+
+
+
+
     }
+
 }
