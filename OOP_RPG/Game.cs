@@ -7,11 +7,13 @@ namespace OOP_RPG
     {
         public Hero Hero { get; }
         public Shop Shop { get; }
+        public EquipItems EquipItems { get; }
 
         public Game()
         {
             Hero = new Hero();
             Shop = new Shop(Hero);
+            EquipItems = new EquipItems(Hero);
 
         }
 
@@ -31,14 +33,15 @@ namespace OOP_RPG
         {
             var input = "0";
 
-            while (input != "5")
+            while (input != "6")
             {
                 Console.WriteLine("Please choose an option by entering a number.");
                 Console.WriteLine("1. View Stats");
                 Console.WriteLine("2. View Inventory");
                 Console.WriteLine("3. Fight Monster");
                 Console.WriteLine("4. View Jerry's Shop");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("5. Un/Equip Items");
+                Console.WriteLine("6. Exit");
 
                 input = Console.ReadLine();
 
@@ -57,6 +60,10 @@ namespace OOP_RPG
                 else if (input == "4")
                 {
                     Shop.OpenShop();
+                }
+                else if (input == "5")
+                {
+                    EquipItems.OpenEquip();
                 }
 
                 if (Hero.CurrentHP <= 0)

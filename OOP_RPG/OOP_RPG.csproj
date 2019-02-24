@@ -46,6 +46,7 @@
     <Compile Include="AmtOfMonsterException.cs" />
     <Compile Include="Armor.cs" />
     <Compile Include="DifficultyLevel.cs" />
+    <Compile Include="EquipItems.cs" />
     <Compile Include="Fight.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Hero.cs" />

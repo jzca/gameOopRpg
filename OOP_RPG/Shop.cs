@@ -1,32 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OOP_RPG
 {
     public class Shop
     {
         public Hero Hero { get; }
-        public Game Game { get; }
         public Weapon BoughtWeapon { get; set; }
         public Armor BoughtArmor { get; set; }
 
-        //    private List<Shop> Items { get; set; }
         public List<Weapon> WeaponsForSale { get; set; }
         public List<Armor> ArmorsForSale { get; set; }
 
-        //public Shop()
-        //{
-        //    Game = new Game();
-        //}
-
-        //public void Add(string name, string description)
-        //{
-        //    var task = new Task(name, description);
-        //    Tasks.Add(task);
-        //}
 
         public Shop(Hero hero)
         {
@@ -40,18 +26,11 @@ namespace OOP_RPG
             ArmorsForSale.Add(new Armor("Golden Vest", 15, 18));
 
             Hero = hero;
-
-            //var sword = new Weapon("Sword", 3, 10);
-            //var axe = new Weapon("Axe", 4, 2);
-            //var longsword = new Weapon("Longsword", 7, 15);
-            //var wooden = new Armor("Wooden Vest", 10, 8);
-            //var metal = new Armor("Metal Vest", 12, 14);
-            //var golden = new Armor("Golden Vest", 15, 18);
         }
 
         public void OpenShop()
         {
-            //var shop = new Shop();
+
             int orderNum = 1;
 
             Console.WriteLine("*****  Weapons ******");
@@ -99,9 +78,9 @@ namespace OOP_RPG
                 shopInput = Console.ReadLine();
 
 
-                if (shopInput.ToLower() == ExitCode)
+                if (shopInput.ToLower() == ExitCode) //Shopping Menu
                 {
-                    Console.WriteLine("Thank you for shopping :)");
+                    Console.WriteLine("Thank you for shopping :)"); // When you leave, it shows up.
                 }
                 else
                 {
@@ -109,27 +88,27 @@ namespace OOP_RPG
                                         where w.GetHashCode().ToString() == shopInput
                                         select w).ToList();
 
-                    if (BoughtWeapon.Any())
+                    if (BoughtWeapon.Any()) // The Cart has 1 item.
                     {
 
-                        var yourWeapon = BoughtWeapon[0];
+                        var yourWeapon = BoughtWeapon[0]; // Switch to Index 0.
 
 
-                        if (Hero.Balance >= yourWeapon.Price)
+                        if (Hero.Balance >= yourWeapon.Price) //Check if the hero has enough money.
                         {
-                            Hero.Balance = Hero.Balance - yourWeapon.Price;
-                            Hero.WeaponsBag.Add(new Weapon(yourWeapon.Name, yourWeapon.Strength, yourWeapon.Price));
-                            Console.WriteLine($"Your just bought {yourWeapon.Name} and your remaining balance is ${Hero.Balance}");
+                            Hero.Balance = Hero.Balance - yourWeapon.Price; // Deduct from the balance.
+                            Hero.WeaponsBag.Add(new Weapon(yourWeapon.Name, yourWeapon.Strength, yourWeapon.Price)); // Add item to the bag.
+                            Console.WriteLine($"Your just bought <{yourWeapon.Name}> and your remaining balance is ${Hero.Balance}"); // Receipt
                         }
                         else
                         {
-                            Console.WriteLine($"Your Balance: ${Hero.Balance} is too low.");
+                            Console.WriteLine($"Your Balance: ${Hero.Balance} is too low."); // Show when the balance is too low to buy sth.
                         }
 
                     }
                     else
                     {
-                        Console.WriteLine("Invalid StockId! Try again.");
+                        Console.WriteLine("Invalid StockId! Try again."); // Show when the input is wrong.
                     }
 
                 }
@@ -168,8 +147,9 @@ namespace OOP_RPG
 
                         if (Hero.Balance >= yourArmor.Price)
                         {
+                            Hero.Balance = Hero.Balance - yourArmor.Price;
                             Hero.ArmorsBag.Add(new Armor(yourArmor.Name, yourArmor.Defense, yourArmor.Price));
-                            Console.WriteLine($"Your just bought {yourArmor.Name} and your remaining balance is ${Hero.Balance}");
+                            Console.WriteLine($"Your just bought <{yourArmor.Name}> and your remaining balance is ${Hero.Balance}");
                         }
                         else
                         {
@@ -188,11 +168,40 @@ namespace OOP_RPG
 
         }
 
+    }
+}
+
+#region Drafts
 
 
 
 
-        
+//    private List<Shop> Items { get; set; }
+
+//public Shop()
+//{
+//    Game = new Game();
+//}
+
+//public void Add(string name, string description)
+//{
+//    var task = new Task(name, description);
+//    Tasks.Add(task);
+//}
+
+
+//var sword = new Weapon("Sword", 3, 10);
+//var axe = new Weapon("Axe", 4, 2);
+//var longsword = new Weapon("Longsword", 7, 15);
+//var wooden = new Armor("Wooden Vest", 10, 8);
+//var metal = new Armor("Metal Vest", 12, 14);
+//var golden = new Armor("Golden Vest", 15, 18);
+
+//var shop = new Shop();
+
+
+
+
 //                    if (BoughtArmor.Any())
 //                    {
 //                        var yourArmor = BoughtArmor[0];
@@ -206,65 +215,62 @@ namespace OOP_RPG
 //                            };
 //});
 
-        //public void AddW()
-        //{
-        //    var weapon = new Weapon(name, strength, price);
-        //    Weapon.Add(weapon);
-        //}
+//public void AddW()
+//{
+//    var weapon = new Weapon(name, strength, price);
+//    Weapon.Add(weapon);
+//}
 
-        //public void ShowShop()
-        //{
-        //    Console.WriteLine("*****  Jerry's Shop ******");
-        //    Console.WriteLine("Weapons: ");
-        //    Console.WriteLine($"{WeaponsForSale.ToString()}");
-        //    Console.WriteLine("Armor: ");
+//public void ShowShop()
+//{
+//    Console.WriteLine("*****  Jerry's Shop ******");
+//    Console.WriteLine("Weapons: ");
+//    Console.WriteLine($"{WeaponsForSale.ToString()}");
+//    Console.WriteLine("Armor: ");
 
-        //}
+//}
 
-        //else if (shopInput == "1")
-        //{
+//else if (shopInput == "1")
+//{
 
-        //    //var BoughtWeapon = (from w in Shop.WeaponsForSale
-        //    //                    where == "Sword"
-        //    //                    select w).ToList();
-        //    var BoughtWeapon = WeaponsForSale[0];
-        //    Hero.WeaponsBag.Add(new Weapon(BoughtWeapon.Name, BoughtWeapon.Strength, BoughtWeapon.Price));
-        //}
-        //else if (shopInput == "2")
-        //{
-        //    var BoughtWeapon = WeaponsForSale[1];
-        //    Hero.WeaponsBag.Add(new Weapon(BoughtWeapon.Name, BoughtWeapon.Strength, BoughtWeapon.Price));
-        //}
-        //else if (shopInput == "3")
-        //{
-        //    var BoughtWeapon = WeaponsForSale[2];
-        //    Hero.WeaponsBag.Add(new Weapon(BoughtWeapon.Name, BoughtWeapon.Strength, BoughtWeapon.Price));
-        //}
-        //else if (shopInput == "4")
-        //{
-        //    var BoughtArmor = ArmorsForSale[0];
-        //    Hero.ArmorsBag.Add(new Armor(BoughtArmor.Name, BoughtArmor.Defense, BoughtArmor.Price));
-        //}
-        //else if (shopInput == "5")
-        //{
-        //    var BoughtArmor = ArmorsForSale[1];
-        //    Hero.ArmorsBag.Add(new Armor(BoughtArmor.Name, BoughtArmor.Defense, BoughtArmor.Price));
-        //}
-        //else if (shopInput == "6")
-        //{
-        //    var BoughtArmor = ArmorsForSale[2];
-        //    Hero.ArmorsBag.Add(new Armor(BoughtArmor.Name, BoughtArmor.Defense, BoughtArmor.Price));
-        //}
-        //else if (shopInput == "7")
-        //{
-        //    Console.WriteLine("Thank you for shopping");
-        //}
-
-
-        //Hero.WeaponsBag.ForEach(a => Console.WriteLine($"{orderNum++}. {a.Name}--D:{a.Strength}--${a.Price}"));
-        //Console.WriteLine();
-        //Console.ReadKey();
+//    //var BoughtWeapon = (from w in Shop.WeaponsForSale
+//    //                    where == "Sword"
+//    //                    select w).ToList();
+//    var BoughtWeapon = WeaponsForSale[0];
+//    Hero.WeaponsBag.Add(new Weapon(BoughtWeapon.Name, BoughtWeapon.Strength, BoughtWeapon.Price));
+//}
+//else if (shopInput == "2")
+//{
+//    var BoughtWeapon = WeaponsForSale[1];
+//    Hero.WeaponsBag.Add(new Weapon(BoughtWeapon.Name, BoughtWeapon.Strength, BoughtWeapon.Price));
+//}
+//else if (shopInput == "3")
+//{
+//    var BoughtWeapon = WeaponsForSale[2];
+//    Hero.WeaponsBag.Add(new Weapon(BoughtWeapon.Name, BoughtWeapon.Strength, BoughtWeapon.Price));
+//}
+//else if (shopInput == "4")
+//{
+//    var BoughtArmor = ArmorsForSale[0];
+//    Hero.ArmorsBag.Add(new Armor(BoughtArmor.Name, BoughtArmor.Defense, BoughtArmor.Price));
+//}
+//else if (shopInput == "5")
+//{
+//    var BoughtArmor = ArmorsForSale[1];
+//    Hero.ArmorsBag.Add(new Armor(BoughtArmor.Name, BoughtArmor.Defense, BoughtArmor.Price));
+//}
+//else if (shopInput == "6")
+//{
+//    var BoughtArmor = ArmorsForSale[2];
+//    Hero.ArmorsBag.Add(new Armor(BoughtArmor.Name, BoughtArmor.Defense, BoughtArmor.Price));
+//}
+//else if (shopInput == "7")
+//{
+//    Console.WriteLine("Thank you for shopping");
+//}
 
 
-    }
-}
+//Hero.WeaponsBag.ForEach(a => Console.WriteLine($"{orderNum++}. {a.Name}--D:{a.Strength}--${a.Price}"));
+//Console.WriteLine();
+//Console.ReadKey();
+#endregion
