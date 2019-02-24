@@ -100,7 +100,7 @@ namespace OOP_RPG
 
         private void WearWeapon()
         {
-            Console.WriteLine("Type the StockId to active #1~4");
+            Console.WriteLine("Type the StockId to Wear Weapon");
             EquipInput = Console.ReadLine();
             var myWeapon = (from w in Hero.WeaponsBag
                             where w.GetHashCode().ToString() == EquipInput
@@ -118,7 +118,7 @@ namespace OOP_RPG
 
         private void WearArmor()
         {
-            Console.WriteLine("Type the StockId to active #1~4");
+            Console.WriteLine("Type the StockId to Wear Armor");
             EquipInput = Console.ReadLine();
             var myArmor = (from w in Hero.ArmorsBag
                            where w.GetHashCode().ToString() == EquipInput

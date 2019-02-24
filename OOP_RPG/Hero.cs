@@ -31,8 +31,8 @@ namespace OOP_RPG
         {
             ArmorsBag = new List<Armor>();
             WeaponsBag = new List<Weapon>();
-            Strength = 30;
-            Defense = 20;
+            Strength = 15;
+            Defense = 15;
             OriginalHP = 35;
             CurrentHP = 35;
             Balance = 40;
@@ -45,6 +45,7 @@ namespace OOP_RPG
             Console.WriteLine("*****" + this.Name + "*****");
             Console.WriteLine("Hitpoints: " + this.CurrentHP + "/" + this.OriginalHP);
             Console.WriteLine("Balance: " + this.Balance);
+
             if (this.EquippedWeapon == null && this.EquippedArmor == null)
             {
                 Console.WriteLine("Nothing equipped");

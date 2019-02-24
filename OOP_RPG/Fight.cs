@@ -12,6 +12,9 @@ namespace OOP_RPG
         private int Damage { get; set; }
         private int Compare { get; set; }
         private int TrophyEarned { get; set; }
+        private int BaseDamage { get; set; }
+        private int MinDamage { get; set; }
+        private int MaxDamage { get; set; }
 
         public Fight(Hero hero)
         {
@@ -62,7 +65,7 @@ namespace OOP_RPG
             AddMonster(DayOfWeek.Saturday, DifficultyLevel.Hard, "Vulpix", 25, 15, 30);
 
             //Sunday
-            AddMonster(DayOfWeek.Sunday, DifficultyLevel.Easy, "Kakuna", 15, 5, 20);
+            AddMonster(DayOfWeek.Sunday, DifficultyLevel.Easy, "Kakuna", 5, 5, 20);
             AddMonster(DayOfWeek.Sunday, DifficultyLevel.Easy, "Beedrill", 15, 5, 20);
             AddMonster(DayOfWeek.Sunday, DifficultyLevel.Medium, "Sandslash", 20, 10, 25);
             AddMonster(DayOfWeek.Sunday, DifficultyLevel.Medium, "Nidoran", 20, 10, 25);
@@ -110,7 +113,19 @@ namespace OOP_RPG
 
         private void HeroTurn()
         {
-            Compare = Hero.Strength - Enemy.Defense;
+
+            // New Damage Calculation
+
+            Random rdmDmg = new Random();
+
+            if (Hero.EquippedWeapon == null)
+            {
+                BaseDamage = Hero.Strength + Hero.EquippedWeapon.Strength - Enemy.Defense;
+                MinDamage = Convert.ToInt32(BaseDamage - BaseDamage * 0.5);
+                MaxDamage = Convert.ToInt32(BaseDamage + BaseDamage * 0.5);
+                Compare = rdmDmg.Next(MinDamage, MaxDamage + 1);
+
+            }
 
             if (Compare <= 0)
             {
@@ -137,7 +152,20 @@ namespace OOP_RPG
 
         private void MonsterTurn()
         {
-            Compare = Enemy.Strength - Hero.Defense;
+            Random rdmDmg2 = new Random();
+
+            if (Hero.EquippedArmor == null)
+            {
+                Compare = Enemy.Strength - Hero.Defense;
+            }
+            else
+            {
+                BaseDamage = Enemy.Strength - (Hero.EquippedArmor.Defense + Hero.Defense);
+                MinDamage = Convert.ToInt32(BaseDamage - BaseDamage * 0.5);
+                MaxDamage = Convert.ToInt32(BaseDamage + BaseDamage * 0.5);
+                Compare = rdmDmg2.Next(MinDamage, MaxDamage + 1);
+            }
+
 
             if (Compare <= 0)
             {
@@ -178,7 +206,7 @@ namespace OOP_RPG
 
             if (Enemy.Difficulty == DifficultyLevel.Easy)
             {
-                TrophyEarned=rdm.Next(1, 11);
+                TrophyEarned = rdm.Next(1, 11);
                 Hero.Balance = Hero.Balance + TrophyEarned;
             }
             else if (Enemy.Difficulty == DifficultyLevel.Medium)
@@ -194,3 +222,10 @@ namespace OOP_RPG
         }
     }
 }
+
+////For Testing
+//AddMonster(DayOfWeek.Sunday, DifficultyLevel.Easy, "Kakuna", 65, 5, 50);
+//AddMonster(DayOfWeek.Sunday, DifficultyLevel.Easy, "Beedrill", 75, 5, 80);
+//AddMonster(DayOfWeek.Sunday, DifficultyLevel.Medium, "Sandslash", 80, 10, 95);
+//AddMonster(DayOfWeek.Sunday, DifficultyLevel.Medium, "Nidoran", 90, 10, 105);
+//AddMonster(DayOfWeek.Sunday, DifficultyLevel.Hard, "Ninetales", 125, 15, 130);
