@@ -31,10 +31,10 @@ namespace OOP_RPG
         {
             ArmorsBag = new List<Armor>();
             WeaponsBag = new List<Weapon>();
-            Strength = 15;
-            Defense = 15;
-            OriginalHP = 35;
-            CurrentHP = 35;
+            Strength = 16;
+            Defense = 12;
+            OriginalHP = 40;
+            CurrentHP = 40;
             Balance = 40;
         }
 
@@ -88,21 +88,5 @@ namespace OOP_RPG
                 Console.WriteLine(armor.Name + " of " + armor.Defense + " Defense");
             }
         }
-
-        //public void EquipWeapon()
-        //{
-        //    if (WeaponsBag.Any())
-        //    {
-        //        this.EquippedWeapon = this.WeaponsBag[0];
-        //    }
-        //}
-
-        //public void EquipArmor()
-        //{
-        //    if (ArmorsBag.Any())
-        //    {
-        //        this.EquippedArmor = this.ArmorsBag[0];
-        //    }
-        //}
     }
 }

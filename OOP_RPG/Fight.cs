@@ -117,14 +117,22 @@ namespace OOP_RPG
             // New Damage Calculation
 
             Random rdmDmg = new Random();
+            int WeaponStrength = 0;
 
-            if (Hero.EquippedWeapon == null)
+            if (Hero.EquippedWeapon != null)
             {
-                BaseDamage = Hero.Strength + Hero.EquippedWeapon.Strength - Enemy.Defense;
-                MinDamage = Convert.ToInt32(BaseDamage - BaseDamage * 0.5);
-                MaxDamage = Convert.ToInt32(BaseDamage + BaseDamage * 0.5);
+                WeaponStrength = Hero.EquippedWeapon.Strength;
+            }
+            BaseDamage = Hero.Strength + WeaponStrength - Enemy.Defense;
+            MinDamage = Convert.ToInt32(BaseDamage - BaseDamage * 0.5);
+            MaxDamage = Convert.ToInt32(BaseDamage + BaseDamage * 0.5);
+            if (MinDamage < MaxDamage)
+            {
                 Compare = rdmDmg.Next(MinDamage, MaxDamage + 1);
-
+            }
+            else
+            {
+                Compare = BaseDamage;
             }
 
             if (Compare <= 0)
@@ -153,17 +161,23 @@ namespace OOP_RPG
         private void MonsterTurn()
         {
             Random rdmDmg2 = new Random();
+            int ArmorDefense = 0;
 
-            if (Hero.EquippedArmor == null)
+            if (Hero.EquippedArmor != null)
             {
-                Compare = Enemy.Strength - Hero.Defense;
+                ArmorDefense = Hero.EquippedArmor.Defense;
             }
-            else
+
+            BaseDamage = Enemy.Strength - (ArmorDefense + Hero.Defense);
+            MinDamage = Convert.ToInt32(BaseDamage - BaseDamage * 0.5);
+
+            MaxDamage = Convert.ToInt32(BaseDamage + BaseDamage * 0.5);
+            if (MinDamage< MaxDamage)
             {
-                BaseDamage = Enemy.Strength - (Hero.EquippedArmor.Defense + Hero.Defense);
-                MinDamage = Convert.ToInt32(BaseDamage - BaseDamage * 0.5);
-                MaxDamage = Convert.ToInt32(BaseDamage + BaseDamage * 0.5);
                 Compare = rdmDmg2.Next(MinDamage, MaxDamage + 1);
+            } else
+            {
+                Compare = BaseDamage;
             }
 
 

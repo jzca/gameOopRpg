@@ -100,38 +100,61 @@ namespace OOP_RPG
 
         private void WearWeapon()
         {
-            Console.WriteLine("Type the StockId to Wear Weapon");
-            EquipInput = Console.ReadLine();
-            var myWeapon = (from w in Hero.WeaponsBag
-                            where w.GetHashCode().ToString() == EquipInput
-                            select w).ToList();
-            if (myWeapon.Any())
+            if (Hero.WeaponsBag.Count == 1)
             {
-                Hero.EquippedWeapon = myWeapon[0];
-                Console.WriteLine($"You equipped: Weapon <{myWeapon[0].Name}>");
-            }
-            else
+                Hero.EquippedWeapon = Hero.WeaponsBag[0];
+                Console.WriteLine($"You equipped: Weapon <{Hero.WeaponsBag[0].Name}>");
+            } else
             {
-                Console.WriteLine("Invalid StockId! Try again."); // Show when the input is wrong.
+
+                Console.WriteLine("Type the StockId to Wear Weapon");
+                EquipInput = Console.ReadLine();
+                var myWeapon = (from w in Hero.WeaponsBag
+                                where w.GetHashCode().ToString() == EquipInput
+                                select w).ToList();
+                if (myWeapon.Any())
+                {
+                    Hero.EquippedWeapon = myWeapon[0];
+                    Console.WriteLine($"You equipped: Weapon <{myWeapon[0].Name}>");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid StockId! Try again."); // Show when the input is wrong.
+                }
+
             }
+
         }
 
         private void WearArmor()
         {
-            Console.WriteLine("Type the StockId to Wear Armor");
-            EquipInput = Console.ReadLine();
-            var myArmor = (from w in Hero.ArmorsBag
-                           where w.GetHashCode().ToString() == EquipInput
-                           select w).ToList();
-            if (myArmor.Any())
+
+            if (Hero.ArmorsBag.Count==1)
             {
-                Hero.EquippedArmor = myArmor[0];
-                Console.WriteLine($"You equipped: Armor <{myArmor[0].Name}>");
+                Hero.EquippedArmor = Hero.ArmorsBag[0];
+                Console.WriteLine($"You equipped: Armor <{Hero.ArmorsBag[0].Name}>");
             }
             else
             {
-                Console.WriteLine("Invalid StockId! Try again."); // Show when the input is wrong.
+
+                Console.WriteLine("Type the StockId to Wear Armor");
+                EquipInput = Console.ReadLine();
+                var myArmor = (from w in Hero.ArmorsBag
+                               where w.GetHashCode().ToString() == EquipInput
+                               select w).ToList();
+                if (myArmor.Any())
+                {
+
+                    Hero.EquippedArmor = myArmor[0];
+                    Console.WriteLine($"You equipped: Armor <{myArmor[0].Name}>");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid StockId! Try again."); // Show when the input is wrong.
+                }
+
             }
+
         }
 
         private void TakeOffWeapon()
