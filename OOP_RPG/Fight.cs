@@ -172,10 +172,11 @@ namespace OOP_RPG
             MinDamage = Convert.ToInt32(BaseDamage - BaseDamage * 0.5);
 
             MaxDamage = Convert.ToInt32(BaseDamage + BaseDamage * 0.5);
-            if (MinDamage< MaxDamage)
+            if (MinDamage < MaxDamage)
             {
                 Compare = rdmDmg2.Next(MinDamage, MaxDamage + 1);
-            } else
+            }
+            else
             {
                 Compare = BaseDamage;
             }

@@ -104,7 +104,8 @@ namespace OOP_RPG
             {
                 Hero.EquippedWeapon = Hero.WeaponsBag[0];
                 Console.WriteLine($"You equipped: Weapon <{Hero.WeaponsBag[0].Name}>");
-            } else
+            }
+            else
             {
 
                 Console.WriteLine("Type the StockId to Wear Weapon");
@@ -129,7 +130,7 @@ namespace OOP_RPG
         private void WearArmor()
         {
 
-            if (Hero.ArmorsBag.Count==1)
+            if (Hero.ArmorsBag.Count == 1)
             {
                 Hero.EquippedArmor = Hero.ArmorsBag[0];
                 Console.WriteLine($"You equipped: Armor <{Hero.ArmorsBag[0].Name}>");

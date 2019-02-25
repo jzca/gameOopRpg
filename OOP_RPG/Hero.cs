@@ -58,16 +58,17 @@ namespace OOP_RPG
                 Console.WriteLine($"Total Strength: {this.Strength + this.EquippedWeapon.Strength} (+{this.EquippedWeapon.Strength})");
                 Console.WriteLine($"Total Defense: {this.Defense + this.EquippedArmor.Defense} (+{this.EquippedArmor.Defense})");
             }
-            else if (this.EquippedWeapon != null){
+            else if (this.EquippedWeapon != null)
+            {
                 Console.WriteLine("A Weapon equipped");
-                Console.WriteLine($"Total Strength: {this.Strength+this.EquippedWeapon.Strength} (+{this.EquippedWeapon.Strength})");
+                Console.WriteLine($"Total Strength: {this.Strength + this.EquippedWeapon.Strength} (+{this.EquippedWeapon.Strength})");
                 Console.WriteLine("Defense: " + this.Defense);
             }
             else if (this.EquippedArmor != null)
             {
                 Console.WriteLine("An Armor equipped");
                 Console.WriteLine("Strength: " + this.Strength);
-                Console.WriteLine($"Total Defense: {this.Defense+ this.EquippedArmor.Defense} (+{this.EquippedArmor.Defense})");
+                Console.WriteLine($"Total Defense: {this.Defense + this.EquippedArmor.Defense} (+{this.EquippedArmor.Defense})");
             }
         }
 
