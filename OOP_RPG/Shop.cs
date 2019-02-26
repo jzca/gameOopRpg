@@ -9,10 +9,12 @@ namespace OOP_RPG
         public Hero Hero { get; }
         public Weapon BoughtWeapon { get; set; }
         public Armor BoughtArmor { get; set; }
+        public Armor BoughtShield { get; set; }
 
         public List<Weapon> WeaponsForSale { get; set; }
         public List<Armor> ArmorsForSale { get; set; }
         public List<Potion> PotionsForSale { get; set; }
+        public List<Armor> ShieldForSale { get; set; }
 
         private EquipItems UserSellThings { get; }
 
@@ -24,21 +26,27 @@ namespace OOP_RPG
             WeaponsForSale = new List<Weapon>();
             ArmorsForSale = new List<Armor>();
             PotionsForSale = new List<Potion>();
+            ShieldForSale = new List<Armor>();
             Hero = hero;
             OrderNum = 1;
             UserSellThings = sellThings;
-            AddNewMonsters();
+            AddNewItems();
             AddNewPotions();
         }
 
-        private void AddNewMonsters()
+        private void AddNewItems()
         {
             WeaponsForSale.Add(new Weapon("Sword", 3, 10));
             WeaponsForSale.Add(new Weapon("Axe", 4, 2));
             WeaponsForSale.Add(new Weapon("Longsword", 7, 15));
+
             ArmorsForSale.Add(new Armor("Wooden Vest", 10, 8));
             ArmorsForSale.Add(new Armor("Metal Vest", 12, 14));
             ArmorsForSale.Add(new Armor("Golden Vest", 15, 18));
+
+            ShieldForSale.Add(new Armor("Wooden Shield", 3, 10));
+            ShieldForSale.Add(new Armor("Battle Shield", 4, 12));
+            ShieldForSale.Add(new Armor("Dragon Shield", 7, 15));
         }
 
         private void AddNewPotions()
@@ -62,9 +70,7 @@ namespace OOP_RPG
                 Console.WriteLine("2. Buy a ARMOR");
                 Console.WriteLine("3. Buy a POTION");
                 Console.WriteLine("4. Buy a SHIELD");
-                Console.WriteLine("5. Sell a WEAPON");
-                Console.WriteLine("6. Sell a ARMOR");
-                Console.WriteLine("7. Sell a POTION");
+                Console.WriteLine("5. Sell an Item");
                 Console.WriteLine("9. No. Leave & return to the main menu.");
 
                 shopAsk = Console.ReadLine();
@@ -83,19 +89,11 @@ namespace OOP_RPG
                 }
                 else if (shopAsk == "4")
                 {
-
+                    BuyShield();
                 }
                 else if (shopAsk == "5")
                 {
                     SellItems();
-                }
-                else if (shopAsk == "6")
-                {
-                    BuyPotion();
-                }
-                else if (shopAsk == "7")
-                {
-                    BuyPotion();
                 }
                 else if (shopAsk == "9")
                 {
@@ -119,6 +117,8 @@ namespace OOP_RPG
             ShowArmors();
             OrderNum += 300;
             ShowPotions();
+            OrderNum += 400;
+            ShowShields();
         }
 
 
@@ -135,6 +135,14 @@ namespace OOP_RPG
 
             Console.WriteLine("*****  Armors ******");
             ArmorsForSale.ForEach(a => Console.WriteLine($"{OrderNum++}. {a.Name}--DE:{a.Defense}--${a.Price}--StockId: {a.GetHashCode().ToString().Substring(0, 4)}"));
+            OrderNum = 1;
+        }
+
+        private void ShowShields()
+        {
+
+            Console.WriteLine("*****  Shields ******");
+            ShieldForSale.ForEach(a => Console.WriteLine($"{OrderNum++}. {a.Name}--DE:{a.Defense}--${a.Price}--StockId: {a.GetHashCode().ToString().Substring(0, 4)}"));
             OrderNum = 1;
         }
 
@@ -251,6 +259,56 @@ namespace OOP_RPG
 
         }
 
+        private void BuyShield()
+        {
+            ShowShields();
+            var shopInput = "0";
+            var ExitCode = "99".ToLower();
+            while (shopInput.ToLower() != ExitCode)
+            {
+                Console.WriteLine("Which Armor do you want?");
+                Console.WriteLine("Type the StockId ");
+                Console.WriteLine($"Type {ExitCode} to Leave ");
+
+                shopInput = Console.ReadLine();
+
+                if (shopInput.ToLower() == ExitCode)
+                {
+                    Console.WriteLine("Thank you for shopping :)");
+                }
+                else
+                {
+                    var BoughtShield = (from w in ShieldForSale
+                                       where w.GetHashCode().ToString().Substring(0, 4) == shopInput
+                                       select w).ToList();
+
+                    if (BoughtShield.Any())
+                    {
+                        var yourShield = BoughtShield[0];
+
+                        if (Hero.Balance >= yourShield.Price)
+                        {
+                            Hero.Balance = Hero.Balance - yourShield.Price;
+                            Hero.ShieldsBag.Add(new Armor(yourShield.Name, yourShield.Defense, yourShield.Price));
+                            Console.WriteLine($"Your just bought <{yourShield.Name}> and your remaining balance is ${Hero.Balance}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Your Balance: ${Hero.Balance} is too low.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid StockId! Try again.");
+                    }
+
+                }
+            }
+
+
+
+        }
+
 
         private void BuyPotion()
         {
@@ -325,10 +383,14 @@ namespace OOP_RPG
                     var myArmor = (from w in Hero.ArmorsBag
                                    where w.GetHashCode().ToString().Substring(0, 4) == shopInput
                                    select w).ToList();
+                    var myShield = (from w in Hero.ShieldsBag
+                                    where w.GetHashCode().ToString().Substring(0, 4) == shopInput
+                                    select w).ToList();
                     var myPotion = (from w in Hero.PotionsBag
                                     where w.GetHashCode().ToString().Substring(0, 4) == shopInput
                                     select w).ToList();
-                    if (!myWeapon.Any() && !myArmor.Any() && !myPotion.Any())
+
+                    if (!myWeapon.Any() && !myArmor.Any() && !myShield.Any() && !myPotion.Any())
                     {
                         Console.WriteLine("[You have Nothing to sell] Or [Try to Type Correct StockId]");
                     }
@@ -336,21 +398,28 @@ namespace OOP_RPG
                     {
                         var potionToRemove = Hero.WeaponsBag.Single(del => del.GetHashCode().ToString().Substring(0, 4) == shopInput);
                         Hero.WeaponsBag.Remove(potionToRemove);
-                        Hero.Balance += Convert.ToInt32(potionToRemove.Price * 0.8);
+                        Hero.Balance += Convert.ToInt32(potionToRemove.Price * 0.7);
                         Console.WriteLine($"You just sold <{potionToRemove.Name}> your new balance is ${Hero.Balance} ");
                     }
                     else if (myArmor.Any())
                     {
                         var potionToRemove = Hero.ArmorsBag.Single(del => del.GetHashCode().ToString().Substring(0, 4) == shopInput);
                         Hero.ArmorsBag.Remove(potionToRemove);
-                        Hero.Balance += Convert.ToInt32(potionToRemove.Price * 0.8);
+                        Hero.Balance += Convert.ToInt32(potionToRemove.Price * 0.7);
+                        Console.WriteLine($"You just sold <{potionToRemove.Name}> your new balance is ${Hero.Balance} ");
+                    }
+                    else if (myShield.Any())
+                    {
+                        var potionToRemove = Hero.ShieldsBag.Single(del => del.GetHashCode().ToString().Substring(0, 4) == shopInput);
+                        Hero.ShieldsBag.Remove(potionToRemove);
+                        Hero.Balance += Convert.ToInt32(potionToRemove.Price * 0.7);
                         Console.WriteLine($"You just sold <{potionToRemove.Name}> your new balance is ${Hero.Balance} ");
                     }
                     else if (myPotion.Any())
                     {
                         var potionToRemove = Hero.PotionsBag.Single(del => del.GetHashCode().ToString().Substring(0, 4) == shopInput);
                         Hero.PotionsBag.Remove(potionToRemove);
-                        Hero.Balance += Convert.ToInt32(potionToRemove.Price * 0.8);
+                        Hero.Balance += Convert.ToInt32(potionToRemove.Price * 0.7);
                         Console.WriteLine($"You just sold <{potionToRemove.Name}> your new balance is ${Hero.Balance} ");
                     }
 
@@ -362,11 +431,7 @@ namespace OOP_RPG
 
         }
 
-        //private void RmFromPlayer()
-        //{
-        //    var potionToRemove = Hero.PotionsBag.Single(del => del.GetHashCode().ToString().Substring(0, 4) == EquipInput);
-        //    Hero.PotionsBag.Remove(potionToRemove);
-        //}
+
 
 
 
@@ -389,106 +454,3 @@ namespace OOP_RPG
 
 }
 
-#region Drafts
-
-
-
-
-//    private List<Shop> Items { get; set; }
-
-//public Shop()
-//{
-//    Game = new Game();
-//}
-
-//public void Add(string name, string description)
-//{
-//    var task = new Task(name, description);
-//    Tasks.Add(task);
-//}
-
-
-//var sword = new Weapon("Sword", 3, 10);
-//var axe = new Weapon("Axe", 4, 2);
-//var longsword = new Weapon("Longsword", 7, 15);
-//var wooden = new Armor("Wooden Vest", 10, 8);
-//var metal = new Armor("Metal Vest", 12, 14);
-//var golden = new Armor("Golden Vest", 15, 18);
-
-//var shop = new Shop();
-
-
-
-
-//                    if (BoughtArmor.Any())
-//                    {
-//                        var yourArmor = BoughtArmor[0];
-//        bool? haveNotBought;
-
-//        Hero.ArmorsBag.ForEach(a =>
-//                        {
-//                            if (a.Name != yourArmor.Name)
-//                            {
-//                                haveNotBought = true;
-//                            };
-//});
-
-//public void AddW()
-//{
-//    var weapon = new Weapon(name, strength, price);
-//    Weapon.Add(weapon);
-//}
-
-//public void ShowShop()
-//{
-//    Console.WriteLine("*****  Jerry's Shop ******");
-//    Console.WriteLine("Weapons: ");
-//    Console.WriteLine($"{WeaponsForSale.ToString()}");
-//    Console.WriteLine("Armor: ");
-
-//}
-
-//else if (shopInput == "1")
-//{
-
-//    //var BoughtWeapon = (from w in Shop.WeaponsForSale
-//    //                    where == "Sword"
-//    //                    select w).ToList();
-//    var BoughtWeapon = WeaponsForSale[0];
-//    Hero.WeaponsBag.Add(new Weapon(BoughtWeapon.Name, BoughtWeapon.Strength, BoughtWeapon.Price));
-//}
-//else if (shopInput == "2")
-//{
-//    var BoughtWeapon = WeaponsForSale[1];
-//    Hero.WeaponsBag.Add(new Weapon(BoughtWeapon.Name, BoughtWeapon.Strength, BoughtWeapon.Price));
-//}
-//else if (shopInput == "3")
-//{
-//    var BoughtWeapon = WeaponsForSale[2];
-//    Hero.WeaponsBag.Add(new Weapon(BoughtWeapon.Name, BoughtWeapon.Strength, BoughtWeapon.Price));
-//}
-//else if (shopInput == "4")
-//{
-//    var BoughtArmor = ArmorsForSale[0];
-//    Hero.ArmorsBag.Add(new Armor(BoughtArmor.Name, BoughtArmor.Defense, BoughtArmor.Price));
-//}
-//else if (shopInput == "5")
-//{
-//    var BoughtArmor = ArmorsForSale[1];
-//    Hero.ArmorsBag.Add(new Armor(BoughtArmor.Name, BoughtArmor.Defense, BoughtArmor.Price));
-//}
-//else if (shopInput == "6")
-//{
-//    var BoughtArmor = ArmorsForSale[2];
-//    Hero.ArmorsBag.Add(new Armor(BoughtArmor.Name, BoughtArmor.Defense, BoughtArmor.Price));
-//}
-//else if (shopInput == "7")
-//{
-//    Console.WriteLine("Thank you for shopping");
-//}
-
-
-//Hero.WeaponsBag.ForEach(a => Console.WriteLine($"{orderNum++}. {a.Name}--D:{a.Strength}--${a.Price}"));
-//Console.WriteLine();
-//Console.ReadKey();
-#endregion

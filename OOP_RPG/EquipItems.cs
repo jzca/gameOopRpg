@@ -32,9 +32,11 @@ namespace OOP_RPG
                 Console.WriteLine("Do you want to do?");
                 Console.WriteLine("1. Wear a WEAPON");
                 Console.WriteLine("2. Wear a ARMOR");
-                Console.WriteLine("3. Take off current WEAPON");
-                Console.WriteLine("4. Take off current ARMOR");
-                Console.WriteLine("5. Drink a POTION");
+                Console.WriteLine("3. Wear a SHIELD");
+                Console.WriteLine("4. Take off current WEAPON");
+                Console.WriteLine("5. Take off current ARMOR");
+                Console.WriteLine("6. Take off current SHIELD");
+                Console.WriteLine("7. Drink a POTION");
                 Console.WriteLine("9. No. Leave & return to the main menu.");
 
                 EquipInput = Console.ReadLine();
@@ -47,7 +49,7 @@ namespace OOP_RPG
                     }
                     else
                     {
-                        Console.WriteLine("Nothing to wear ");
+                        Console.WriteLine("No Weapon to wear ");
                     }
 
                 }
@@ -59,10 +61,21 @@ namespace OOP_RPG
                     }
                     else
                     {
-                        Console.WriteLine("Nothing to wear ");
+                        Console.WriteLine("No Armor to wear ");
                     }
                 }
                 else if (EquipInput == "3")
+                {
+                    if (Hero.ShieldsBag.Any())
+                    {
+                        WearShield();
+                    }
+                    else
+                    {
+                        Console.WriteLine("No Shield to wear ");
+                    }
+                }
+                else if (EquipInput == "4")
                 {
 
                     if (Hero.EquippedWeapon != null)
@@ -71,12 +84,12 @@ namespace OOP_RPG
                     }
                     else
                     {
-                        Console.WriteLine("Nothing to take off ");
+                        Console.WriteLine("No Weapon to take off ");
                     }
 
 
                 }
-                else if (EquipInput == "4")
+                else if (EquipInput == "5")
                 {
                     if (Hero.EquippedArmor != null)
                     {
@@ -84,10 +97,21 @@ namespace OOP_RPG
                     }
                     else
                     {
-                        Console.WriteLine("Nothing to take off ");
+                        Console.WriteLine("No Armor to take off ");
                     }
                 }
-                else if (EquipInput == "5")
+                else if (EquipInput == "6")
+                {
+                    if (Hero.EquippedShield != null)
+                    {
+                        TakeOffShield();
+                    }
+                    else
+                    {
+                        Console.WriteLine("No Shield to take off ");
+                    }
+                }
+                else if (EquipInput == "7")
                 {
                     if (Hero.PotionsBag.Any())
                     {
@@ -124,6 +148,8 @@ namespace OOP_RPG
             ShowArmors();
             OrderNum += 300;
             ShowPotions();
+            OrderNum += 400;
+            ShowShields();
         }
 
         private void ShowWeapons()
@@ -142,12 +168,22 @@ namespace OOP_RPG
             OrderNum = 1;
         }
 
+        private void ShowShields()
+        {
+
+            Console.WriteLine("*****  Shield ******");
+            Hero.ShieldsBag.ForEach(a => Console.WriteLine($"{OrderNum++}. {a.Name}--DE:{a.Defense}--${a.Price}--StockId: {a.GetHashCode().ToString().Substring(0, 4)}"));
+            OrderNum = 1;
+        }
+
         private void ShowPotions()
         {
             Console.WriteLine("*****  Potions ******");
             Hero.PotionsBag.ForEach(a => Console.WriteLine($"{OrderNum++}. {a.Name}--HP:{a.HP}--${a.Price}--StockId: {a.GetHashCode().ToString().Substring(0, 4)}"));
             OrderNum = 1;
         }
+
+
 
         #endregion
 
@@ -217,6 +253,38 @@ namespace OOP_RPG
 
         }
 
+        private void WearShield()
+        {
+            ShowShields();
+
+            if (Hero.ShieldsBag.Count == 1)
+            {
+                Hero.EquippedShield = Hero.ShieldsBag[0];
+                Console.WriteLine($"You equipped: Shield <{Hero.ShieldsBag[0].Name}>");
+            }
+            else
+            {
+
+                Console.WriteLine("Type the StockId to Wear Shield");
+                EquipInput = Console.ReadLine();
+                var myShield = (from w in Hero.ShieldsBag
+                               where w.GetHashCode().ToString().Substring(0, 4) == EquipInput
+                               select w).ToList();
+                if (myShield.Any())
+                {
+
+                    Hero.EquippedShield = myShield[0];
+                    Console.WriteLine($"You equipped: Shield <{myShield[0].Name}>");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid StockId! Try again."); // Show when the input is wrong.
+                }
+
+            }
+        }
+
+
         private void TakeOffWeapon()
         {
             Hero.EquippedWeapon = null;
@@ -226,7 +294,13 @@ namespace OOP_RPG
         private void TakeOffArmor()
         {
             Hero.EquippedArmor = null;
-            Console.WriteLine($"You Un-equipped yourArmor");
+            Console.WriteLine($"You Un-equipped your Armor");
+        }
+
+        private void TakeOffShield()
+        {
+            Hero.EquippedShield = null;
+            Console.WriteLine($"You Un-equipped your Shield");
         }
 
         public void DrinkPotion()
@@ -263,13 +337,9 @@ namespace OOP_RPG
                         Hero.CurrentHP = Hero.OriginalHP; // Then use OriginalHP as CurrentHP
                     }
 
-                    Console.WriteLine($"You drank: Potion <{myPotion[0].Name}>");
-                    //myPotion.RemoveAt(0);
+                    Console.WriteLine($"You drank: Potion <{myPotion[0].Name}> and your new HP is {Hero.CurrentHP}");
                     var potionToRemove = Hero.PotionsBag.Single(del => del.GetHashCode().ToString().Substring(0, 4) == EquipInput);
                     Hero.PotionsBag.Remove(potionToRemove);
-                    //myPotion = (from del in Hero.PotionsBag
-                    //            where del.GetHashCode().ToString().Substring(0, 4) != EquipInput
-                    //            select del).ToList();
                 }
                 else
                 {

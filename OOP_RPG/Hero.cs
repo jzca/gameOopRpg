@@ -17,9 +17,12 @@ namespace OOP_RPG
         public List<Armor> ArmorsBag { get; set; }
         public List<Weapon> WeaponsBag { get; set; }
 
+
         // Additions
         public int Balance { get; set; }
         public List<Potion> PotionsBag { get; set; }
+        public Armor EquippedShield { get; set; }
+        public List<Armor> ShieldsBag { get; set; }
 
         /*This is a Constructor.
         When we create a new object from our Hero class, the instance of this class, our hero, has:
@@ -33,6 +36,7 @@ namespace OOP_RPG
             ArmorsBag = new List<Armor>();
             WeaponsBag = new List<Weapon>();
             PotionsBag = new List<Potion>();
+            ShieldsBag = new List<Armor>();
             Strength = 16;
             Defense = 12;
             OriginalHP = 40;
@@ -48,17 +52,37 @@ namespace OOP_RPG
             Console.WriteLine("Hitpoints: " + this.CurrentHP + "/" + this.OriginalHP);
             Console.WriteLine("Balance: " + this.Balance);
 
-            if (this.EquippedWeapon == null && this.EquippedArmor == null)
+            if (this.EquippedWeapon == null && this.EquippedArmor == null && this.EquippedShield == null)
             {
                 Console.WriteLine("Nothing equipped");
                 Console.WriteLine("Strength: " + this.Strength);
                 Console.WriteLine("Defense: " + this.Defense);
+            }
+            else if (this.EquippedWeapon != null && this.EquippedArmor != null && this.EquippedShield != null)
+            {
+                Console.WriteLine("A Weapon & an Armor & a Shield  equipped");
+                Console.WriteLine($"Total Strength: {this.Strength + this.EquippedWeapon.Strength} (+{this.EquippedWeapon.Strength}) ");
+                Console.WriteLine($"Total Defense: {this.Defense + this.EquippedArmor.Defense+ this.EquippedShield.Defense}" +
+                    $"(+{this.EquippedArmor.Defense}, +{this.EquippedShield.Defense})");
             }
             else if (this.EquippedWeapon != null && this.EquippedArmor != null)
             {
                 Console.WriteLine("A Weapon & an Armor equipped");
                 Console.WriteLine($"Total Strength: {this.Strength + this.EquippedWeapon.Strength} (+{this.EquippedWeapon.Strength})");
                 Console.WriteLine($"Total Defense: {this.Defense + this.EquippedArmor.Defense} (+{this.EquippedArmor.Defense})");
+            }
+            else if (this.EquippedWeapon != null && this.EquippedShield != null)
+            {
+                Console.WriteLine("A Weapon & a Shield equipped");
+                Console.WriteLine($"Total Strength: {this.Strength + this.EquippedWeapon.Strength} (+{this.EquippedWeapon.Strength})");
+                Console.WriteLine($"Total Defense: {this.Defense + this.EquippedShield.Defense} (+{this.EquippedShield.Defense})");
+            }
+            else if (this.EquippedArmor != null && this.EquippedShield != null)
+            {
+                Console.WriteLine("An Armor & a Shield equipped");
+                Console.WriteLine("Strength: " + this.Strength);
+                Console.WriteLine($"Total Defense: {this.Defense + this.EquippedArmor.Defense + this.EquippedShield.Defense} " +
+                    $"(+{this.EquippedArmor.Defense}, +{this.EquippedShield.Defense})");
             }
             else if (this.EquippedWeapon != null)
             {
@@ -72,6 +96,14 @@ namespace OOP_RPG
                 Console.WriteLine("Strength: " + this.Strength);
                 Console.WriteLine($"Total Defense: {this.Defense + this.EquippedArmor.Defense} (+{this.EquippedArmor.Defense})");
             }
+            else if (this.EquippedShield != null)
+            {
+                Console.WriteLine("A Shield equipped");
+                Console.WriteLine("Strength: " + this.Strength);
+                Console.WriteLine($"Total Defense: {this.Defense + this.EquippedShield.Defense} (+{this.EquippedShield.Defense})");
+            }
+
+
         }
 
         public void ShowInventory()
@@ -89,6 +121,14 @@ namespace OOP_RPG
             foreach (var armor in this.ArmorsBag)
             {
                 Console.WriteLine(armor.Name + " of " + armor.Defense + " Defense");
+            }
+
+
+            Console.WriteLine("Shield: ");
+
+            foreach (var shield in this.ShieldsBag)
+            {
+                Console.WriteLine(shield.Name + " of " + shield.Defense + " Defense");
             }
 
             Console.WriteLine("Potions: ");

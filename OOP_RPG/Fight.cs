@@ -165,13 +165,18 @@ namespace OOP_RPG
         private void MonsterTurn()
         {
             int ArmorDefense = 0;
+            int ShieldDefense = 0;
 
             if (Hero.EquippedArmor != null)
             {
                 ArmorDefense = Hero.EquippedArmor.Defense;
             }
+            if (Hero.EquippedShield != null)
+            {
+                ShieldDefense = Hero.EquippedShield.Defense;
+            }
 
-            BaseDamage = Enemy.Strength - (ArmorDefense + Hero.Defense);
+            BaseDamage = Enemy.Strength - (ArmorDefense+ ShieldDefense + Hero.Defense);
 
             MinDamage = Convert.ToInt32(BaseDamage - BaseDamage * 0.5);
 
