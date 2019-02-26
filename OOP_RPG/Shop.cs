@@ -14,16 +14,19 @@ namespace OOP_RPG
         public List<Armor> ArmorsForSale { get; set; }
         public List<Potion> PotionsForSale { get; set; }
 
+        private EquipItems UserSellThings { get; }
+
         private int OrderNum { get; set; }
 
 
-        public Shop(Hero hero)
+        public Shop(Hero hero , EquipItems sellThings)
         {
             WeaponsForSale = new List<Weapon>();
             ArmorsForSale = new List<Armor>();
             PotionsForSale = new List<Potion>();
             Hero = hero;
             OrderNum = 1;
+            UserSellThings = sellThings;
             AddNewMonsters();
             AddNewPotions();
         }
@@ -54,10 +57,14 @@ namespace OOP_RPG
 
             while (shopAsk != "9")
             {
-                Console.WriteLine("Do you want to buy my items?");
-                Console.WriteLine("1. Yes. Buy a WEAPON");
-                Console.WriteLine("2. Yes. Buy a ARMOR");
-                Console.WriteLine("3. Yes. Buy a POTION");
+                Console.WriteLine("Do you want to do?");
+                Console.WriteLine("1. Buy a WEAPON");
+                Console.WriteLine("2. Buy a ARMOR");
+                Console.WriteLine("3. Buy a POTION");
+                Console.WriteLine("4. Buy a SHIELD");
+                Console.WriteLine("5. Sell a WEAPON");
+                Console.WriteLine("6. Sell a ARMOR");
+                Console.WriteLine("7. Sell a POTION");
                 Console.WriteLine("9. No. Leave & return to the main menu.");
 
                 shopAsk = Console.ReadLine();
@@ -71,6 +78,22 @@ namespace OOP_RPG
                     BuyArmor();
                 }
                 else if (shopAsk == "3")
+                {
+                    BuyPotion();
+                }
+                else if (shopAsk == "4")
+                {
+
+                }
+                else if (shopAsk == "5")
+                {
+                    SellItems();
+                }
+                else if (shopAsk == "6")
+                {
+                    BuyPotion();
+                }
+                else if (shopAsk == "7")
                 {
                     BuyPotion();
                 }
@@ -275,6 +298,81 @@ namespace OOP_RPG
                 }
             }
         }
+
+        private void SellItems()
+        {
+            UserSellThings.ShowALLItems();
+            var shopInput = "0";
+            var ExitCode = "99".ToLower();
+            while (shopInput.ToLower() != ExitCode)
+            {
+                Console.WriteLine("Which one do you want to sell?");
+                Console.WriteLine("Type the StockId ");
+                Console.WriteLine($"Type {ExitCode} to Leave ");
+
+                shopInput = Console.ReadLine();
+
+
+                if (shopInput.ToLower() == ExitCode) //Shopping Menu
+                {
+                    Console.WriteLine("Thank you for visiting :)"); // When you leave, it shows up.
+                }
+                else
+                {
+                    var myWeapon = (from w in Hero.WeaponsBag
+                                    where w.GetHashCode().ToString().Substring(0, 4) == shopInput
+                                    select w).ToList();
+                    var myArmor = (from w in Hero.ArmorsBag
+                                   where w.GetHashCode().ToString().Substring(0, 4) == shopInput
+                                   select w).ToList();
+                    var myPotion = (from w in Hero.PotionsBag
+                                    where w.GetHashCode().ToString().Substring(0, 4) == shopInput
+                                    select w).ToList();
+                    if (!myWeapon.Any() && !myArmor.Any() && !myPotion.Any())
+                    {
+                        Console.WriteLine("[You have Nothing to sell] Or [Try to Type Correct StockId]");
+                    }
+                    else if (myWeapon.Any())
+                    {
+                        var potionToRemove = Hero.WeaponsBag.Single(del => del.GetHashCode().ToString().Substring(0, 4) == shopInput);
+                        Hero.WeaponsBag.Remove(potionToRemove);
+                        Hero.Balance += Convert.ToInt32(potionToRemove.Price * 0.8);
+                        Console.WriteLine($"You just sold <{potionToRemove.Name}> your new balance is ${Hero.Balance} ");
+                    }
+                    else if (myArmor.Any())
+                    {
+                        var potionToRemove = Hero.ArmorsBag.Single(del => del.GetHashCode().ToString().Substring(0, 4) == shopInput);
+                        Hero.ArmorsBag.Remove(potionToRemove);
+                        Hero.Balance += Convert.ToInt32(potionToRemove.Price * 0.8);
+                        Console.WriteLine($"You just sold <{potionToRemove.Name}> your new balance is ${Hero.Balance} ");
+                    }
+                    else if (myPotion.Any())
+                    {
+                        var potionToRemove = Hero.PotionsBag.Single(del => del.GetHashCode().ToString().Substring(0, 4) == shopInput);
+                        Hero.PotionsBag.Remove(potionToRemove);
+                        Hero.Balance += Convert.ToInt32(potionToRemove.Price * 0.8);
+                        Console.WriteLine($"You just sold <{potionToRemove.Name}> your new balance is ${Hero.Balance} ");
+                    }
+
+
+                }
+            }
+
+
+
+        }
+
+        //private void RmFromPlayer()
+        //{
+        //    var potionToRemove = Hero.PotionsBag.Single(del => del.GetHashCode().ToString().Substring(0, 4) == EquipInput);
+        //    Hero.PotionsBag.Remove(potionToRemove);
+        //}
+
+
+
+
+
+
 
 
 

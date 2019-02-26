@@ -116,7 +116,7 @@ namespace OOP_RPG
 
         #region ShowWhatInTheBags
 
-        private void ShowALLItems()
+        public void ShowALLItems()
         {
             Console.WriteLine("*****  You have ******");
             ShowWeapons();

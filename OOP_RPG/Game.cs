@@ -12,8 +12,8 @@ namespace OOP_RPG
         public Game()
         {
             Hero = new Hero();
-            Shop = new Shop(Hero);
             EquipItems = new EquipItems(Hero);
+            Shop = new Shop(Hero, EquipItems);
 
         }
 
