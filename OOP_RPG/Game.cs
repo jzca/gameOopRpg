@@ -33,15 +33,15 @@ namespace OOP_RPG
         {
             var input = "0";
 
-            while (input != "6")
+            while (input != "9")
             {
                 Console.WriteLine("Please choose an option by entering a number.");
                 Console.WriteLine("1. View Stats");
                 Console.WriteLine("2. View Inventory");
                 Console.WriteLine("3. Fight Monster");
                 Console.WriteLine("4. View Jerry's Shop");
-                Console.WriteLine("5. Un/Equip Items");
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("5. Un/Equip Items Or Recover HP");
+                Console.WriteLine("9. Exit");
 
                 input = Console.ReadLine();
 
@@ -68,7 +68,7 @@ namespace OOP_RPG
 
                 if (Hero.CurrentHP <= 0)
                 {
-                    return;
+                    Console.WriteLine("You must recover your HP before fighting ");
                 }
             }
         }
@@ -91,7 +91,7 @@ namespace OOP_RPG
 
         private void Fight()
         {
-            var fight = new Fight(Hero);
+            var fight = new Fight(Hero, EquipItems);
 
             fight.Start();
         }

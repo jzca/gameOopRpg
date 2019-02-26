@@ -15,11 +15,16 @@ namespace OOP_RPG
         private int BaseDamage { get; set; }
         private int MinDamage { get; set; }
         private int MaxDamage { get; set; }
+        private Random rdmDmg { get; set; }
+        private EquipItems RecoverHP { get; }
 
-        public Fight(Hero hero)
+
+        public Fight(Hero hero, EquipItems recoverHP)
         {
             Hero = hero;
             Monsters = new List<Monster>();
+            rdmDmg = new Random();
+            RecoverHP = recoverHP;
 
             #region AddMonsters
             // Monday
@@ -116,7 +121,6 @@ namespace OOP_RPG
 
             // New Damage Calculation
 
-            Random rdmDmg = new Random();
             int WeaponStrength = 0;
 
             if (Hero.EquippedWeapon != null)
@@ -124,8 +128,8 @@ namespace OOP_RPG
                 WeaponStrength = Hero.EquippedWeapon.Strength;
             }
             BaseDamage = Hero.Strength + WeaponStrength - Enemy.Defense;
-            MinDamage = Convert.ToInt32(BaseDamage - BaseDamage * 0.5);
-            MaxDamage = Convert.ToInt32(BaseDamage + BaseDamage * 0.5);
+            MinDamage = Convert.ToInt32(BaseDamage * 0.5);
+            MaxDamage = Convert.ToInt32(BaseDamage * 1.5);
             if (MinDamage < MaxDamage)
             {
                 Compare = rdmDmg.Next(MinDamage, MaxDamage + 1);
@@ -160,7 +164,6 @@ namespace OOP_RPG
 
         private void MonsterTurn()
         {
-            Random rdmDmg2 = new Random();
             int ArmorDefense = 0;
 
             if (Hero.EquippedArmor != null)
@@ -169,12 +172,13 @@ namespace OOP_RPG
             }
 
             BaseDamage = Enemy.Strength - (ArmorDefense + Hero.Defense);
+
             MinDamage = Convert.ToInt32(BaseDamage - BaseDamage * 0.5);
 
             MaxDamage = Convert.ToInt32(BaseDamage + BaseDamage * 0.5);
             if (MinDamage < MaxDamage)
             {
-                Compare = rdmDmg2.Next(MinDamage, MaxDamage + 1);
+                Compare = rdmDmg.Next(MinDamage, MaxDamage + 1);
             }
             else
             {
@@ -195,11 +199,42 @@ namespace OOP_RPG
 
             Console.WriteLine(Enemy.Name + " does " + Damage + " damage!");
 
+            if (Hero.CurrentHP<= 20)  // When HP is less than 20
+            {
+                MoreLife(); // Ask the gamer if he wants to recover HP
+            }
+
+
             if (Hero.CurrentHP <= 0)
             {
                 Lose();
             }
         }
+
+        private void MoreLife()
+        {
+            Console.WriteLine($"Your Current HP is [{Hero.CurrentHP}].");
+            Console.WriteLine("Would you like to recover HP ?");
+            Console.WriteLine("Type 1 for [Yay], Anything-else for [Nay].");
+            var userInput=Console.ReadLine();
+            if (userInput == "1")
+            {
+                if (Hero.PotionsBag.Any())
+                {
+                RecoverHP.DrinkPotion();
+                }
+                else
+                {
+                    Console.WriteLine("Sorry. You don't have any potion.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Happy Fighting");
+                Console.WriteLine(" ");
+            }
+        }
+
 
         private void Win()
         {
@@ -211,8 +246,7 @@ namespace OOP_RPG
         private void Lose()
         {
             Console.WriteLine("You've been defeated! :( GAME OVER.");
-            Console.WriteLine("Press any key to exit the game");
-            Console.ReadKey();
+            Console.WriteLine(" ");
         }
 
         private void Trophy()
@@ -222,18 +256,18 @@ namespace OOP_RPG
             if (Enemy.Difficulty == DifficultyLevel.Easy)
             {
                 TrophyEarned = rdm.Next(1, 11);
-                Hero.Balance = Hero.Balance + TrophyEarned;
             }
             else if (Enemy.Difficulty == DifficultyLevel.Medium)
             {
                 TrophyEarned = rdm.Next(11, 21);
-                Hero.Balance = Hero.Balance + TrophyEarned;
             }
             else if (Enemy.Difficulty == DifficultyLevel.Hard)
             {
                 TrophyEarned = rdm.Next(21, 31);
-                Hero.Balance = Hero.Balance + TrophyEarned;
             }
+
+            Hero.Balance += TrophyEarned;
+
         }
     }
 }

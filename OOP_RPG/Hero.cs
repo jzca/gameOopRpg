@@ -19,6 +19,7 @@ namespace OOP_RPG
 
         // Additions
         public int Balance { get; set; }
+        public List<Potion> PotionsBag { get; set; }
 
         /*This is a Constructor.
         When we create a new object from our Hero class, the instance of this class, our hero, has:
@@ -31,10 +32,11 @@ namespace OOP_RPG
         {
             ArmorsBag = new List<Armor>();
             WeaponsBag = new List<Weapon>();
+            PotionsBag = new List<Potion>();
             Strength = 16;
             Defense = 12;
             OriginalHP = 40;
-            CurrentHP = 40;
+            CurrentHP = 30;
             Balance = 40;
         }
 
@@ -88,6 +90,15 @@ namespace OOP_RPG
             {
                 Console.WriteLine(armor.Name + " of " + armor.Defense + " Defense");
             }
+
+            Console.WriteLine("Potions: ");
+
+            foreach (var potion in this.PotionsBag)
+            {
+                Console.WriteLine(potion.Name + " of " + potion.HP + " Health Points");
+            }
+
+
         }
     }
 }

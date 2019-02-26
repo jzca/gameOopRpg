@@ -4,7 +4,7 @@ namespace OOP_RPG
     {
         public string Name { get; }
         public int Defense { get; }
-        public int Price { get; set; }
+        public int Price { get; }
 
         public Armor(string name, int defense,int price)
         {
