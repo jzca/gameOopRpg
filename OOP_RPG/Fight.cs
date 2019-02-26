@@ -19,9 +19,11 @@ namespace OOP_RPG
         private Random rdmEscape { get; set; }
         private EquipItems RecoverHP { get; }
         private bool NotEscape { get; set; }
+        private AchievementSystem Achievement { get; set; }
 
 
-        public Fight(Hero hero, EquipItems recoverHP)
+
+        public Fight(Hero hero, EquipItems recoverHP, AchievementSystem achievement)
         {
             Hero = hero;
             Monsters = new List<Monster>();
@@ -29,6 +31,7 @@ namespace OOP_RPG
             rdmEscape = new Random();
             RecoverHP = recoverHP;
             NotEscape = true;
+            Achievement = achievement;
 
             #region AddMonsters
             // Monday
@@ -163,12 +166,20 @@ namespace OOP_RPG
 
             if (Enemy.CurrentHP <= 0)
             {
+                AchievementProcess();
                 Win();
             }
             else
             {
                 MonsterTurn();
             }
+        }
+
+        private void AchievementProcess()
+        {
+            Achievement.AddNameMonster(Enemy.Name);
+            Achievement.CountMonsters();
+            Achievement.PublishAchievement();
         }
 
         private void MonsterTurn()
@@ -341,6 +352,8 @@ namespace OOP_RPG
         {
             Console.WriteLine(" ");
         }
+
+
 
 
     }

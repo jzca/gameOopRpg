@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AchievementSystem.cs" />
     <Compile Include="AmtOfMonsterException.cs" />
     <Compile Include="Armor.cs" />
     <Compile Include="DifficultyLevel.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="Fight.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Hero.cs" />
+    <Compile Include="NameOfMonster.cs" />
     <Compile Include="Monster.cs" />
     <Compile Include="Potion.cs" />
     <Compile Include="Program.cs" />

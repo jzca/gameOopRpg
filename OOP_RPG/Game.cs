@@ -8,13 +8,14 @@ namespace OOP_RPG
         public Hero Hero { get; }
         public Shop Shop { get; }
         public EquipItems EquipItems { get; }
+        public AchievementSystem AchievementSystem { get; set; }
 
         public Game()
         {
             Hero = new Hero();
             EquipItems = new EquipItems(Hero);
             Shop = new Shop(Hero, EquipItems);
-
+            AchievementSystem = new AchievementSystem();
         }
 
         public void Start()
@@ -41,6 +42,7 @@ namespace OOP_RPG
                 Console.WriteLine("3. Fight Monster");
                 Console.WriteLine("4. View Jerry's Shop");
                 Console.WriteLine("5. Un/Equip Items Or Recover HP");
+                Console.WriteLine("6. View Achievements");
                 Console.WriteLine("9. Exit");
 
                 input = Console.ReadLine();
@@ -64,6 +66,19 @@ namespace OOP_RPG
                 else if (input == "5")
                 {
                     EquipItems.OpenEquip();
+                }
+                else if (input == "6")
+                {
+                    AchievementSystem.ShowAllAchievement();
+                }
+
+                if (input == "superhero")
+                {
+                    Hero.Balance = 1000;
+                    Hero.OriginalHP = 1000;
+                    Hero.Defense = 1000;
+                    Hero.Strength = 1000;
+                    Hero.CurrentHP = Hero.OriginalHP;
                 }
 
                 if (Hero.CurrentHP <= 0)
@@ -91,7 +106,7 @@ namespace OOP_RPG
 
         private void Fight()
         {
-            var fight = new Fight(Hero, EquipItems);
+            var fight = new Fight(Hero, EquipItems, AchievementSystem);
 
             fight.Start();
         }

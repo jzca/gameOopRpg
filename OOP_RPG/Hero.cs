@@ -8,8 +8,8 @@ namespace OOP_RPG
     {
         // These are the Properties of our Class.
         public string Name { get; set; }
-        public int Strength { get; }
-        public int Defense { get; }
+        public int Strength { get; set; }
+        public int Defense { get; set; }
         public int OriginalHP { get; set; }
         public int CurrentHP { get; set; }
         public Weapon EquippedWeapon { get; set; }
@@ -40,7 +40,7 @@ namespace OOP_RPG
             Strength = 16;
             Defense = 12;
             OriginalHP = 40;
-            CurrentHP = 30;
+            CurrentHP = 50;
             Balance = 40;
         }
 
