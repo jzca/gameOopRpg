@@ -16,7 +16,9 @@ namespace OOP_RPG
         private int MinDamage { get; set; }
         private int MaxDamage { get; set; }
         private Random rdmDmg { get; set; }
+        private Random rdmEscape { get; set; }
         private EquipItems RecoverHP { get; }
+        private bool NotEscape { get; set; }
 
 
         public Fight(Hero hero, EquipItems recoverHP)
@@ -24,7 +26,9 @@ namespace OOP_RPG
             Hero = hero;
             Monsters = new List<Monster>();
             rdmDmg = new Random();
+            rdmEscape = new Random();
             RecoverHP = recoverHP;
+            NotEscape = true;
 
             #region AddMonsters
             // Monday
@@ -100,18 +104,23 @@ namespace OOP_RPG
                      orderby Guid.NewGuid().ToString()
                      select m).First();
 
-            while (Enemy.CurrentHP > 0 && Hero.CurrentHP > 0)
+            while (Enemy.CurrentHP > 0 && Hero.CurrentHP > 0 && NotEscape)
             {
                 Console.WriteLine($"You've encountered a {Enemy.Name}! {Enemy.Difficulty} Level, {Enemy.Strength} Strength, {Enemy.Defense} Defense," +
-                    $" { Enemy.CurrentHP} HP. What will you do?");
+                    $" { Enemy.CurrentHP } HP. What will you do?");
 
                 Console.WriteLine("1. Fight");
+                Console.WriteLine("2. Run Away");
 
                 var input = Console.ReadLine();
 
                 if (input == "1")
                 {
                     HeroTurn();
+                }
+                else if (input == "2")
+                {
+                    CanEscape();
                 }
             }
         }
@@ -164,6 +173,33 @@ namespace OOP_RPG
 
         private void MonsterTurn()
         {
+            MonsterTurnBasic();
+
+            if (Hero.CurrentHP <= 20)  // When HP is less than 20
+            {
+                MoreLife(); // Ask the gamer if he wants to recover HP
+            }
+
+
+            if (Hero.CurrentHP <= 0)
+            {
+                Lose();
+            }
+        }
+
+        private void EscapeMonsterTurn()
+        {
+            MonsterTurnBasic();
+
+            if (Hero.CurrentHP <= 0)
+            {
+                Lose();
+            }
+        }
+
+
+        private void MonsterTurnBasic()
+        {
             int ArmorDefense = 0;
             int ShieldDefense = 0;
 
@@ -176,7 +212,7 @@ namespace OOP_RPG
                 ShieldDefense = Hero.EquippedShield.Defense;
             }
 
-            BaseDamage = Enemy.Strength - (ArmorDefense+ ShieldDefense + Hero.Defense);
+            BaseDamage = Enemy.Strength - (ArmorDefense + ShieldDefense + Hero.Defense);
 
             MinDamage = Convert.ToInt32(BaseDamage - BaseDamage * 0.5);
 
@@ -204,16 +240,7 @@ namespace OOP_RPG
 
             Console.WriteLine(Enemy.Name + " does " + Damage + " damage!");
 
-            if (Hero.CurrentHP<= 20)  // When HP is less than 20
-            {
-                MoreLife(); // Ask the gamer if he wants to recover HP
-            }
 
-
-            if (Hero.CurrentHP <= 0)
-            {
-                Lose();
-            }
         }
 
         private void MoreLife()
@@ -221,12 +248,12 @@ namespace OOP_RPG
             Console.WriteLine($"Your Current HP is [{Hero.CurrentHP}].");
             Console.WriteLine("Would you like to recover HP ?");
             Console.WriteLine("Type 1 for [Yay], Anything-else for [Nay].");
-            var userInput=Console.ReadLine();
+            var userInput = Console.ReadLine();
             if (userInput == "1")
             {
                 if (Hero.PotionsBag.Any())
                 {
-                RecoverHP.DrinkPotion();
+                    RecoverHP.DrinkPotion();
                 }
                 else
                 {
@@ -236,7 +263,7 @@ namespace OOP_RPG
             else
             {
                 Console.WriteLine("Happy Fighting");
-                Console.WriteLine(" ");
+                BlankSpace();
             }
         }
 
@@ -251,7 +278,7 @@ namespace OOP_RPG
         private void Lose()
         {
             Console.WriteLine("You've been defeated! :( GAME OVER.");
-            Console.WriteLine(" ");
+            BlankSpace();
         }
 
         private void Trophy()
@@ -274,12 +301,47 @@ namespace OOP_RPG
             Hero.Balance += TrophyEarned;
 
         }
+
+        private void CanEscape()
+        {
+
+            if (Enemy.Difficulty == DifficultyLevel.Easy && rdmEscape.Next(0, 101) < 51)
+            {
+                RunAway();
+            }
+            else if (Enemy.Difficulty == DifficultyLevel.Medium && rdmEscape.Next(0, 101) < 26)
+            {
+                RunAway();
+            }
+            else if (Enemy.Difficulty == DifficultyLevel.Hard && rdmEscape.Next(0, 101) < 6)
+            {
+                RunAway();
+            }
+            else
+            {
+                MsgFailedRunAway();
+                BlankSpace();
+                EscapeMonsterTurn();
+            }
+        }
+
+        private void RunAway()
+        {
+            NotEscape = false;
+            Console.WriteLine("Congrats! You Escaped from the Monster!");
+            BlankSpace();
+        }
+
+        private void MsgFailedRunAway()
+        {
+            Console.WriteLine("Opps. Failed to Escape! You will be hit.");
+        }
+
+        private void BlankSpace()
+        {
+            Console.WriteLine(" ");
+        }
+
+
     }
 }
-
-////For Testing
-//AddMonster(DayOfWeek.Sunday, DifficultyLevel.Easy, "Kakuna", 65, 5, 50);
-//AddMonster(DayOfWeek.Sunday, DifficultyLevel.Easy, "Beedrill", 75, 5, 80);
-//AddMonster(DayOfWeek.Sunday, DifficultyLevel.Medium, "Sandslash", 80, 10, 95);
-//AddMonster(DayOfWeek.Sunday, DifficultyLevel.Medium, "Nidoran", 90, 10, 105);
-//AddMonster(DayOfWeek.Sunday, DifficultyLevel.Hard, "Ninetales", 125, 15, 130);
