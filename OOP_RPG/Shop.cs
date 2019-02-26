@@ -99,11 +99,7 @@ namespace OOP_RPG
                 {
                     Console.WriteLine("Bye Bye");
                 }
-                else if (shopAsk.ToLower() == "tipme")
-                {
-                    Hero.Balance = 1000;
-                    Console.WriteLine($"You are as rich as ${Hero.Balance}");
-                }
+
             }
         }
 

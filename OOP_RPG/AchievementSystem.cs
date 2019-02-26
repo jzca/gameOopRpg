@@ -5,20 +5,9 @@ using System.Linq;
 namespace OOP_RPG
 {
 
-    //public enum MessageOfAchievement
-    //{
-
-    //    Killing_1_Monster,
-    //    Killing_3_Monster,
-    //    Killing_5_Different_Monster,
-    //    Killing_10_Monster,
-    //}
-
-
     public class AchievementSystem
     {
 
-        //public MessageOfAchievement MsgOfAchievement { get; set; }
         public int Points { get; set; }
         public int CounterOfMonsters { get; set; }
         public int NumberDiffMonsters { get; set; }

@@ -9,6 +9,7 @@ namespace OOP_RPG
         public Shop Shop { get; }
         public EquipItems EquipItems { get; }
         public AchievementSystem AchievementSystem { get; set; }
+        private string GameInput { get; set; }
 
         public Game()
         {
@@ -32,10 +33,15 @@ namespace OOP_RPG
 
         public void Main()
         {
-            var input = "0";
+            GameInput = "0";
 
-            while (input != "9")
+            while (GameInput != "9")
             {
+                if (GameInput.ToLower() != "superhero" || GameInput.ToLower() != "tipme") // Un-Show CheatCodes
+                {
+                Console.WriteLine("Type <SuperHero> to boost all data of Hero.");
+                Console.WriteLine("Type <TipMe> to get rich. Case does not matter.");
+                }
                 Console.WriteLine("Please choose an option by entering a number.");
                 Console.WriteLine("1. View Stats");
                 Console.WriteLine("2. View Inventory");
@@ -45,46 +51,40 @@ namespace OOP_RPG
                 Console.WriteLine("6. View Achievements");
                 Console.WriteLine("9. Exit");
 
-                input = Console.ReadLine();
+                GameInput = Console.ReadLine();
 
-                if (input == "1")
+                if (GameInput == "1")
                 {
                     this.Stats();
                 }
-                else if (input == "2")
+                else if (GameInput == "2")
                 {
                     this.Inventory();
                 }
-                else if (input == "3")
+                else if (GameInput == "3")
                 {
                     this.Fight();
                 }
-                else if (input == "4")
+                else if (GameInput == "4")
                 {
                     Shop.OpenShop();
                 }
-                else if (input == "5")
+                else if (GameInput == "5")
                 {
                     EquipItems.OpenEquip();
                 }
-                else if (input == "6")
+                else if (GameInput == "6")
                 {
                     AchievementSystem.ShowAllAchievement();
                 }
 
-                if (input == "superhero")
-                {
-                    Hero.Balance = 1000;
-                    Hero.OriginalHP = 1000;
-                    Hero.Defense = 1000;
-                    Hero.Strength = 1000;
-                    Hero.CurrentHP = Hero.OriginalHP;
-                }
-
                 if (Hero.CurrentHP <= 0)
                 {
-                    Console.WriteLine("You must recover your HP before fighting ");
+                    Console.WriteLine("You must recover your HP before fighting");
                 }
+
+                CheatCode();
+
             }
         }
 
@@ -111,7 +111,22 @@ namespace OOP_RPG
             fight.Start();
         }
 
-
+        private void CheatCode()
+        {
+            if (GameInput.ToLower() == "superhero")
+            {
+                Hero.Balance = 1000;
+                Hero.OriginalHP = 1000;
+                Hero.Defense = 1000;
+                Hero.Strength = 1000;
+                Hero.CurrentHP = Hero.OriginalHP;
+            }
+            if (GameInput.ToLower() == "tipme")
+            {
+                Hero.Balance = 1000;
+                Console.WriteLine($"You are as rich as ${Hero.Balance}");
+            }
+        }
 
 
 
