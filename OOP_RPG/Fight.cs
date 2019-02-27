@@ -109,12 +109,16 @@ namespace OOP_RPG
 
             while (Enemy.CurrentHP > 0 && Hero.CurrentHP > 0 && NotEscape)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
+
                 Console.WriteLine($"You've encountered a {Enemy.Name}! {Enemy.Difficulty} Level, {Enemy.Strength} Strength, {Enemy.Defense} Defense," +
                     $" { Enemy.CurrentHP } HP. What will you do?");
 
                 Console.WriteLine("1. Fight");
                 Console.WriteLine("2. Run Away");
                 Console.WriteLine("3. Heal");
+
+                Console.ResetColor();
 
                 var input = Console.ReadLine();
 

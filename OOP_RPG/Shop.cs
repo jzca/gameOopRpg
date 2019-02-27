@@ -92,7 +92,8 @@ namespace OOP_RPG
 
         private void ShowALLItems()
         {
-            Console.WriteLine("*****  The Shop has ******");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("*****  Shop ******");
             ShowWeapons();
             OrderNum += 200;
             ShowArmors();
@@ -100,6 +101,8 @@ namespace OOP_RPG
             ShowPotions();
             OrderNum += 400;
             ShowShields();
+
+            Console.ResetColor();
         }
 
 

@@ -125,6 +125,8 @@ namespace OOP_RPG
 
         public void ShowAllAchievement()
         {
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Achievements ({ Points } points)");
 
             if (PassAchievement == 100 || PassAchievement > 199)
@@ -150,6 +152,8 @@ namespace OOP_RPG
             {
                 Console.WriteLine($"You have no achievements.");
             }
+
+            Console.ResetColor();
         }
 
     }

@@ -142,6 +142,7 @@ namespace OOP_RPG
 
         public void ShowALLItems()
         {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("*****  You have ******");
             ShowWeapons();
             OrderNum += 200;
@@ -150,6 +151,7 @@ namespace OOP_RPG
             ShowPotions();
             OrderNum += 400;
             ShowShields();
+            Console.ResetColor();
         }
 
         private void ShowWeapons()

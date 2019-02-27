@@ -37,6 +37,7 @@ namespace OOP_RPG
 
             while (GameInput != "9")
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Please choose an option by entering a number.");
                 Console.WriteLine("1. View Stats");
                 Console.WriteLine("2. View Inventory");
@@ -45,6 +46,7 @@ namespace OOP_RPG
                 Console.WriteLine("5. Un/Equip Items Or Recover HP");
                 Console.WriteLine("6. View Achievements");
                 Console.WriteLine("9. Exit");
+                Console.ResetColor();
 
                 GameInput = Console.ReadLine();
 
@@ -85,24 +87,29 @@ namespace OOP_RPG
 
         private void Stats()
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
             Hero.ShowStats();
 
             Console.WriteLine("Press any key to return to main menu.");
+            Console.ResetColor();
+
             Console.ReadKey();
         }
 
         private void Inventory()
         {
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Hero.ShowInventory();
 
             Console.WriteLine("Press any key to return to main menu.");
+            Console.ResetColor();
+
             Console.ReadKey();
         }
 
         private void Fight()
         {
             var fight = new Fight(Hero, EquipItems, AchievementSystem);
-
             fight.Start();
         }
 
