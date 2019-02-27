@@ -278,7 +278,7 @@ namespace OOP_RPG
             {
                 if (Hero.CurrentHP == Hero.OriginalHP)
                 {
-                    Console.WriteLine($"You cannot buy the service since you are very healthy.");
+                    Console.WriteLine($"You cannot buy the service because you are very healthy.");
                 }
                 else
                 {
@@ -306,10 +306,10 @@ namespace OOP_RPG
 
         private void Win()
         {
-            Trophy();
             Console.WriteLine(Enemy.Name + " has been defeated! You win the battle!");
-            Console.WriteLine($"You earned ${TrophyEarned} and your balance is now: ${Hero.Balance}.");
             AchievementProcess();
+            Trophy();
+            Console.WriteLine($"You earned ${TrophyEarned} and your balance is now: ${Hero.Balance}.");
         }
 
         private void Lose()

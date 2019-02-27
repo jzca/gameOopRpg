@@ -50,7 +50,7 @@ namespace OOP_RPG
 
             // Basic Function + Testing
             var theDiff = (from d in NameOfMonsters
-                           group d.Name by d.Name into repeatedName
+                           group d by d.Name into repeatedName
                            select new
                            {
                                Text = repeatedName.Count()
@@ -96,6 +96,14 @@ namespace OOP_RPG
                 Points += 2;
                 Console.WriteLine($"You archieved <{Level2}>--P: {Points}");
                 PassAchievement = 200;
+            }
+            else if (CounterOfMonsters == 10 && CountertheDiffFirstTime == 1)
+            {
+                Dl3 = DateTime.Now;
+                Dl4 = Dl3;
+                Points += 8;
+                Console.WriteLine($"You archieved <{Level3}>--<{Level4}>--P: {Points}");
+                PassAchievement = 400;
             }
             else if (CounterOfMonsters == 10)
             {
