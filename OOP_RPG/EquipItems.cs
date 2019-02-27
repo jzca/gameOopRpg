@@ -142,7 +142,7 @@ namespace OOP_RPG
 
         public void ShowALLItems()
         {
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("*****  You have ******");
             ShowWeapons();
             OrderNum += 200;
@@ -156,33 +156,38 @@ namespace OOP_RPG
 
         private void ShowWeapons()
         {
-
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("*****  Weapons ******");
             Hero.WeaponsBag.ForEach(a => Console.WriteLine($"{OrderNum++}. {a.Name}--ST:{a.Strength}--${a.Price}--StockId: {a.GetHashCode().ToString().Substring(0, 4)}"));
             OrderNum = 1;
+            Console.ResetColor();
         }
 
         private void ShowArmors()
         {
-
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("*****  Armors ******");
             Hero.ArmorsBag.ForEach(a => Console.WriteLine($"{OrderNum++}. {a.Name}--DE:{a.Defense}--${a.Price}--StockId: {a.GetHashCode().ToString().Substring(0, 4)}"));
             OrderNum = 1;
+            Console.ResetColor();
         }
 
         private void ShowShields()
         {
-
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("*****  Shield ******");
             Hero.ShieldsBag.ForEach(a => Console.WriteLine($"{OrderNum++}. {a.Name}--DE:{a.Defense}--${a.Price}--StockId: {a.GetHashCode().ToString().Substring(0, 4)}"));
             OrderNum = 1;
+            Console.ResetColor();
         }
 
         private void ShowPotions()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("*****  Potions ******");
             Hero.PotionsBag.ForEach(a => Console.WriteLine($"{OrderNum++}. {a.Name}--HP:{a.HP}--${a.Price}--StockId: {a.GetHashCode().ToString().Substring(0, 4)}"));
             OrderNum = 1;
+            Console.ResetColor();
         }
 
 
