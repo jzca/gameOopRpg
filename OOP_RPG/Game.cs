@@ -37,16 +37,11 @@ namespace OOP_RPG
 
             while (GameInput != "9")
             {
-                if (GameInput.ToLower() != "superhero" || GameInput.ToLower() != "tipme") // Un-Show CheatCodes
-                {
-                    Console.WriteLine("Type <SuperHero> to boost all data of Hero.");
-                    Console.WriteLine("Type <TipMe> to get rich. Case does not matter.");
-                }
                 Console.WriteLine("Please choose an option by entering a number.");
                 Console.WriteLine("1. View Stats");
                 Console.WriteLine("2. View Inventory");
                 Console.WriteLine("3. Fight Monster");
-                Console.WriteLine("4. View Jerry's Shop");
+                Console.WriteLine("4. View Shop");
                 Console.WriteLine("5. Un/Equip Items Or Recover HP");
                 Console.WriteLine("6. View Achievements");
                 Console.WriteLine("9. Exit");
@@ -120,6 +115,7 @@ namespace OOP_RPG
                 Hero.Defense = 1000;
                 Hero.Strength = 1000;
                 Hero.CurrentHP = Hero.OriginalHP;
+                Console.WriteLine($"You are a superhero now");
             }
             if (GameInput.ToLower() == "tipme")
             {

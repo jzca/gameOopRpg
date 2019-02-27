@@ -114,6 +114,7 @@ namespace OOP_RPG
 
                 Console.WriteLine("1. Fight");
                 Console.WriteLine("2. Run Away");
+                Console.WriteLine("3. Heal");
 
                 var input = Console.ReadLine();
 
@@ -124,6 +125,10 @@ namespace OOP_RPG
                 else if (input == "2")
                 {
                     CanEscape();
+                }
+                else if (input == "3")
+                {
+                    MoreLife(); // Ask the gamer if he wants to recover HP
                 }
             }
         }
@@ -166,7 +171,6 @@ namespace OOP_RPG
 
             if (Enemy.CurrentHP <= 0)
             {
-                AchievementProcess();
                 Win();
             }
             else
@@ -185,12 +189,6 @@ namespace OOP_RPG
         private void MonsterTurn()
         {
             MonsterTurnBasic();
-
-            if (Hero.CurrentHP <= 20)  // When HP is less than 20
-            {
-                MoreLife(); // Ask the gamer if he wants to recover HP
-            }
-
 
             if (Hero.CurrentHP <= 0)
             {
@@ -250,6 +248,7 @@ namespace OOP_RPG
             }
 
             Console.WriteLine(Enemy.Name + " does " + Damage + " damage!");
+            Console.WriteLine($"Your remaining HP is [{Hero.CurrentHP}].");
 
 
         }
@@ -258,7 +257,11 @@ namespace OOP_RPG
         {
             Console.WriteLine($"Your Current HP is [{Hero.CurrentHP}].");
             Console.WriteLine("Would you like to recover HP ?");
-            Console.WriteLine("Type 1 for [Yay], Anything-else for [Nay].");
+            Console.WriteLine("1. Yay");
+            Console.WriteLine("Anykey to Nay");
+            Console.WriteLine($"911. Emergency Aid--No Refund:");
+            Console.WriteLine($"${Hero.OriginalHP} for {Hero.OriginalHP}HP");
+
             var userInput = Console.ReadLine();
             if (userInput == "1")
             {
@@ -270,6 +273,28 @@ namespace OOP_RPG
                 {
                     Console.WriteLine("Sorry. You don't have any potion.");
                 }
+            }
+            else if (userInput.ToLower() == "911")
+            {
+                if (Hero.CurrentHP == Hero.OriginalHP)
+                {
+                    Console.WriteLine($"You cannot buy the service since you are very healthy.");
+                }
+                else
+                {
+                    if (Hero.Balance >= Hero.OriginalHP) //Check if the hero has enough money.
+                    {
+                        Hero.Balance -= Hero.OriginalHP;
+                        Hero.CurrentHP = Hero.OriginalHP;
+                        Console.WriteLine($"Your new HP is {Hero.CurrentHP}.");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Sorry you wallet is too thin.");
+                    }
+                }
+
+
             }
             else
             {
@@ -284,6 +309,7 @@ namespace OOP_RPG
             Trophy();
             Console.WriteLine(Enemy.Name + " has been defeated! You win the battle!");
             Console.WriteLine($"You earned ${TrophyEarned} and your balance is now: ${Hero.Balance}.");
+            AchievementProcess();
         }
 
         private void Lose()
