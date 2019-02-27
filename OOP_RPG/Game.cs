@@ -39,8 +39,8 @@ namespace OOP_RPG
             {
                 if (GameInput.ToLower() != "superhero" || GameInput.ToLower() != "tipme") // Un-Show CheatCodes
                 {
-                Console.WriteLine("Type <SuperHero> to boost all data of Hero.");
-                Console.WriteLine("Type <TipMe> to get rich. Case does not matter.");
+                    Console.WriteLine("Type <SuperHero> to boost all data of Hero.");
+                    Console.WriteLine("Type <TipMe> to get rich. Case does not matter.");
                 }
                 Console.WriteLine("Please choose an option by entering a number.");
                 Console.WriteLine("1. View Stats");

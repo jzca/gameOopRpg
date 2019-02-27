@@ -268,8 +268,8 @@ namespace OOP_RPG
                 Console.WriteLine("Type the StockId to Wear Shield");
                 EquipInput = Console.ReadLine();
                 var myShield = (from w in Hero.ShieldsBag
-                               where w.GetHashCode().ToString().Substring(0, 4) == EquipInput
-                               select w).ToList();
+                                where w.GetHashCode().ToString().Substring(0, 4) == EquipInput
+                                select w).ToList();
                 if (myShield.Any())
                 {
 

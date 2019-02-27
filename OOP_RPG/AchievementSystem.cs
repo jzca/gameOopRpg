@@ -8,25 +8,27 @@ namespace OOP_RPG
     public class AchievementSystem
     {
 
-        public int Points { get; set; }
-        public int CounterOfMonsters { get; set; }
-        public int NumberDiffMonsters { get; set; }
-        public int PassAchievement { get; set; }
+        private int Points { get; set; }
+        private int CounterOfMonsters { get; set; }
+        private int CountertheDiffFirstTime { get; set; }
+        private int NumberDiffMonsters { get; set; }
+        private int PassAchievement { get; set; }
         public List<NameOfMonster> NameOfMonsters { get; set; }
-        public string Level1 { get; set; }
-        public string Level2 { get; set; }
-        public string Level3 { get; set; }
-        public string Level4 { get; set; }
-        public DateTime Dl1 { get; set; }
-        public DateTime Dl2 { get; set; }
-        public DateTime Dl3 { get; set; }
-        public DateTime Dl4 { get; set; }
+        private string Level1 { get; set; }
+        private string Level2 { get; set; }
+        private string Level3 { get; set; }
+        private string Level4 { get; set; }
+        private DateTime Dl1 { get; set; }
+        private DateTime Dl2 { get; set; }
+        private DateTime Dl3 { get; set; }
+        private DateTime Dl4 { get; set; }
 
 
         public AchievementSystem()
         {
             Points = 0;
             PassAchievement = 0;
+            CountertheDiffFirstTime = 0;
             NameOfMonsters = new List<NameOfMonster>();
 
             Level1 = "Killing 1 monster";
@@ -52,17 +54,21 @@ namespace OOP_RPG
                            select new
                            {
                                Text = repeatedName.Count()
-                           }).ToList() ;
+                           }).ToList();
 
-            theDiff.ForEach(p => Console.WriteLine($"Num: {p.Text}"));
+            //// theDiff.ForEach(p => Console.WriteLine($"Num: {p.Text}"));
 
             // Core Function
 
             if (theDiff.Any())
             {
-                NumberDiffMonsters=Convert.ToInt32(theDiff.Count);
+                NumberDiffMonsters = Convert.ToInt32(theDiff.Count);
             }
 
+            if (NumberDiffMonsters == 5)
+            {
+                CountertheDiffFirstTime++;
+            }
 
 
         }
@@ -80,7 +86,7 @@ namespace OOP_RPG
             if (CounterOfMonsters == 1)
             {
                 Dl1 = DateTime.Now;
-                PassAchievement=100;
+                PassAchievement = 100;
                 Points = 1;
                 Console.WriteLine($"You archieved <{Level1}>--P: {Points}");
             }
@@ -98,7 +104,7 @@ namespace OOP_RPG
                 Console.WriteLine($"You archieved <{Level3}>--P: {Points}");
                 PassAchievement = 300;
             }
-            else if (NumberDiffMonsters == 5)
+            else if (CountertheDiffFirstTime == 1)
             {
                 Dl4 = DateTime.Now;
                 Points += 5;
@@ -112,8 +118,8 @@ namespace OOP_RPG
         public void ShowAllAchievement()
         {
             Console.WriteLine($"Achievements ({ Points } points)");
-        
-            if (PassAchievement==100 || PassAchievement>199)
+
+            if (PassAchievement == 100 || PassAchievement > 199)
             {
                 Console.WriteLine($"<{Level1}>--{Dl1}");
             }
@@ -122,7 +128,7 @@ namespace OOP_RPG
                 Console.WriteLine($"<{Level2}>--{Dl2}");
             }
 
-            if (PassAchievement == 300 || PassAchievement >399)
+            if (PassAchievement == 300 || PassAchievement > 399)
             {
                 Console.WriteLine($"<{Level3}>--{Dl3}");
             }
@@ -132,7 +138,7 @@ namespace OOP_RPG
                 Console.WriteLine($"<{Level4}>--{Dl4}");
             }
 
-            if (PassAchievement==0)
+            if (PassAchievement == 0)
             {
                 Console.WriteLine($"You have no achievements.");
             }

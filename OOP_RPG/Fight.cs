@@ -186,7 +186,7 @@ namespace OOP_RPG
         {
             MonsterTurnBasic();
 
-            if (Hero.CurrentHP <= 20 && Hero.PotionsBag.Any())  // When HP is less than 20
+            if (Hero.CurrentHP <= 20)  // When HP is less than 20
             {
                 MoreLife(); // Ask the gamer if he wants to recover HP
             }

@@ -21,7 +21,7 @@ namespace OOP_RPG
         private int OrderNum { get; set; }
 
 
-        public Shop(Hero hero , EquipItems sellThings)
+        public Shop(Hero hero, EquipItems sellThings)
         {
             WeaponsForSale = new List<Weapon>();
             ArmorsForSale = new List<Armor>();
@@ -275,8 +275,8 @@ namespace OOP_RPG
                 else
                 {
                     var BoughtShield = (from w in ShieldForSale
-                                       where w.GetHashCode().ToString().Substring(0, 4) == shopInput
-                                       select w).ToList();
+                                        where w.GetHashCode().ToString().Substring(0, 4) == shopInput
+                                        select w).ToList();
 
                     if (BoughtShield.Any())
                     {

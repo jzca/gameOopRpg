@@ -62,7 +62,7 @@ namespace OOP_RPG
             {
                 Console.WriteLine("A Weapon & an Armor & a Shield  equipped");
                 Console.WriteLine($"Total Strength: {this.Strength + this.EquippedWeapon.Strength} (+{this.EquippedWeapon.Strength}) ");
-                Console.WriteLine($"Total Defense: {this.Defense + this.EquippedArmor.Defense+ this.EquippedShield.Defense}" +
+                Console.WriteLine($"Total Defense: {this.Defense + this.EquippedArmor.Defense + this.EquippedShield.Defense}" +
                     $"(+{this.EquippedArmor.Defense}, +{this.EquippedShield.Defense})");
             }
             else if (this.EquippedWeapon != null && this.EquippedArmor != null)
