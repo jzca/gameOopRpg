@@ -16,12 +16,12 @@ namespace OOP_RPG
         public List<Potion> PotionsForSale { get; set; }
         public List<Armor> ShieldForSale { get; set; }
 
-        private EquipItems UserSellThings { get; }
+        private EquipItemsOrDrinkPotions UserSellThings { get; }
 
         private int OrderNum { get; set; }
 
 
-        public Shop(Hero hero, EquipItems sellThings)
+        public Shop(Hero hero, EquipItemsOrDrinkPotions sellThings)
         {
             WeaponsForSale = new List<Weapon>();
             ArmorsForSale = new List<Armor>();

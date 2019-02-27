@@ -17,13 +17,13 @@ namespace OOP_RPG
         private int MaxDamage { get; set; }
         private Random rdmDmg { get; set; }
         private Random rdmEscape { get; set; }
-        private EquipItems RecoverHP { get; }
+        private EquipItemsOrDrinkPotions RecoverHP { get; }
         private bool NotEscape { get; set; }
         private AchievementSystem Achievement { get; set; }
 
 
 
-        public Fight(Hero hero, EquipItems recoverHP, AchievementSystem achievement)
+        public Fight(Hero hero, EquipItemsOrDrinkPotions recoverHP, AchievementSystem achievement)
         {
             Hero = hero;
             Monsters = new List<Monster>();

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_RPG
 {
-    public class EquipItems
+    public class EquipItemsOrDrinkPotions
     {
         public Hero Hero { get; }
         public Shop Shop { get; }
@@ -14,7 +14,7 @@ namespace OOP_RPG
         private int OrderNum { get; set; }
 
 
-        public EquipItems(Hero hero)
+        public EquipItemsOrDrinkPotions(Hero hero)
         {
             Hero = hero;
             OrderNum = 1;

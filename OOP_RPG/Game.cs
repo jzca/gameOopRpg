@@ -7,14 +7,14 @@ namespace OOP_RPG
     {
         public Hero Hero { get; }
         public Shop Shop { get; }
-        public EquipItems EquipItems { get; }
+        public EquipItemsOrDrinkPotions EquipItems { get; }
         public AchievementSystem AchievementSystem { get; set; }
         private string GameInput { get; set; }
 
         public Game()
         {
             Hero = new Hero();
-            EquipItems = new EquipItems(Hero);
+            EquipItems = new EquipItemsOrDrinkPotions(Hero);
             Shop = new Shop(Hero, EquipItems);
             AchievementSystem = new AchievementSystem();
         }
