@@ -13,7 +13,7 @@ namespace OOP_RPG
         private int CountertheDiffFirstTime { get; set; }
         private int NumberDiffMonsters { get; set; }
         private int PassAchievement { get; set; }
-        public List<NameOfMonster> NameOfMonsters { get; set; }
+        private List<NameOfMonster> NameOfMonsters { get; set; }
         private string Level1 { get; set; }
         private string Level2 { get; set; }
         private string Level3 { get; set; }
@@ -88,13 +88,13 @@ namespace OOP_RPG
                 Dl1 = DateTime.Now;
                 PassAchievement = 100;
                 Points = 1;
-                Console.WriteLine($"You archieved <{Level1}>--P: {Points}");
+                Console.WriteLine($"You achieved <{Level1}>--P: {Points}");
             }
             else if (CounterOfMonsters == 3)
             {
                 Dl2 = DateTime.Now;
                 Points += 2;
-                Console.WriteLine($"You archieved <{Level2}>--P: {Points}");
+                Console.WriteLine($"You achieved <{Level2}>--P: {Points}");
                 PassAchievement = 200;
             }
             else if (CounterOfMonsters == 10 && CountertheDiffFirstTime == 1)
@@ -102,21 +102,21 @@ namespace OOP_RPG
                 Dl3 = DateTime.Now;
                 Dl4 = Dl3;
                 Points += 8;
-                Console.WriteLine($"You archieved <{Level3}>--<{Level4}>--P: {Points}");
+                Console.WriteLine($"You achieved <{Level3}>--<{Level4}>--P: {Points}");
                 PassAchievement = 400;
             }
             else if (CounterOfMonsters == 10)
             {
                 Dl3 = DateTime.Now;
                 Points += 3;
-                Console.WriteLine($"You archieved <{Level3}>--P: {Points}");
+                Console.WriteLine($"You achieved <{Level3}>--P: {Points}");
                 PassAchievement = 300;
             }
             else if (CountertheDiffFirstTime == 1)
             {
                 Dl4 = DateTime.Now;
                 Points += 5;
-                Console.WriteLine($"You archieved <{Level4}>--P: {Points}");
+                Console.WriteLine($"You achieved <{Level4}>--P: {Points}");
                 PassAchievement = 400;
             }
 
@@ -158,3 +158,12 @@ namespace OOP_RPG
 
     }
 }
+
+//private List<NameOfMonster> NameOfMonstersPrivate { get; set; }
+//public IReadOnlyList  NameOfMonsters
+//{
+//    get
+//    {
+
+//    }
+//}

@@ -48,59 +48,59 @@ namespace OOP_RPG
         public void ShowStats()
         {
 
-            Console.WriteLine("*****" + this.Name + "*****");
-            Console.WriteLine("Hitpoints: " + this.CurrentHP + "/" + this.OriginalHP);
-            Console.WriteLine("Balance: " + this.Balance);
+            Console.WriteLine("*****" + Name + "*****");
+            Console.WriteLine("Hitpoints: " + CurrentHP + "/" + OriginalHP);
+            Console.WriteLine("Balance: " + Balance);
 
-            if (this.EquippedWeapon == null && this.EquippedArmor == null && this.EquippedShield == null)
+            if (EquippedWeapon == null && EquippedArmor == null && EquippedShield == null)
             {
                 Console.WriteLine("Nothing equipped");
-                Console.WriteLine("Strength: " + this.Strength);
-                Console.WriteLine("Defense: " + this.Defense);
+                Console.WriteLine("Strength: " + Strength);
+                Console.WriteLine("Defense: " + Defense);
             }
-            else if (this.EquippedWeapon != null && this.EquippedArmor != null && this.EquippedShield != null)
+            else if (EquippedWeapon != null && EquippedArmor != null && EquippedShield != null)
             {
                 Console.WriteLine("A Weapon & an Armor & a Shield  equipped");
-                Console.WriteLine($"Total Strength: {this.Strength + this.EquippedWeapon.Strength} (+{this.EquippedWeapon.Strength}) ");
-                Console.WriteLine($"Total Defense: {this.Defense + this.EquippedArmor.Defense + this.EquippedShield.Defense}" +
-                    $"(+{this.EquippedArmor.Defense}, +{this.EquippedShield.Defense})");
+                Console.WriteLine($"Total Strength: {Strength + EquippedWeapon.Strength} (+{EquippedWeapon.Strength}) ");
+                Console.WriteLine($"Total Defense: {Defense + EquippedArmor.Defense + EquippedShield.Defense}" +
+                    $"(+{EquippedArmor.Defense}, +{EquippedShield.Defense})");
             }
-            else if (this.EquippedWeapon != null && this.EquippedArmor != null)
+            else if (EquippedWeapon != null && EquippedArmor != null)
             {
                 Console.WriteLine("A Weapon & an Armor equipped");
-                Console.WriteLine($"Total Strength: {this.Strength + this.EquippedWeapon.Strength} (+{this.EquippedWeapon.Strength})");
-                Console.WriteLine($"Total Defense: {this.Defense + this.EquippedArmor.Defense} (+{this.EquippedArmor.Defense})");
+                Console.WriteLine($"Total Strength: {Strength + EquippedWeapon.Strength} (+{EquippedWeapon.Strength})");
+                Console.WriteLine($"Total Defense: {Defense + EquippedArmor.Defense} (+{EquippedArmor.Defense})");
             }
-            else if (this.EquippedWeapon != null && this.EquippedShield != null)
+            else if (EquippedWeapon != null && EquippedShield != null)
             {
                 Console.WriteLine("A Weapon & a Shield equipped");
-                Console.WriteLine($"Total Strength: {this.Strength + this.EquippedWeapon.Strength} (+{this.EquippedWeapon.Strength})");
-                Console.WriteLine($"Total Defense: {this.Defense + this.EquippedShield.Defense} (+{this.EquippedShield.Defense})");
+                Console.WriteLine($"Total Strength: {Strength + EquippedWeapon.Strength} (+{EquippedWeapon.Strength})");
+                Console.WriteLine($"Total Defense: {Defense + EquippedShield.Defense} (+{EquippedShield.Defense})");
             }
-            else if (this.EquippedArmor != null && this.EquippedShield != null)
+            else if (EquippedArmor != null && EquippedShield != null)
             {
                 Console.WriteLine("An Armor & a Shield equipped");
-                Console.WriteLine("Strength: " + this.Strength);
-                Console.WriteLine($"Total Defense: {this.Defense + this.EquippedArmor.Defense + this.EquippedShield.Defense} " +
-                    $"(+{this.EquippedArmor.Defense}, +{this.EquippedShield.Defense})");
+                Console.WriteLine("Strength: " + Strength);
+                Console.WriteLine($"Total Defense: {Defense + EquippedArmor.Defense + EquippedShield.Defense} " +
+                    $"(+{EquippedArmor.Defense}, +{EquippedShield.Defense})");
             }
-            else if (this.EquippedWeapon != null)
+            else if (EquippedWeapon != null)
             {
                 Console.WriteLine("A Weapon equipped");
-                Console.WriteLine($"Total Strength: {this.Strength + this.EquippedWeapon.Strength} (+{this.EquippedWeapon.Strength})");
-                Console.WriteLine("Defense: " + this.Defense);
+                Console.WriteLine($"Total Strength: {Strength + EquippedWeapon.Strength} (+{EquippedWeapon.Strength})");
+                Console.WriteLine("Defense: " + Defense);
             }
-            else if (this.EquippedArmor != null)
+            else if (EquippedArmor != null)
             {
                 Console.WriteLine("An Armor equipped");
-                Console.WriteLine("Strength: " + this.Strength);
-                Console.WriteLine($"Total Defense: {this.Defense + this.EquippedArmor.Defense} (+{this.EquippedArmor.Defense})");
+                Console.WriteLine("Strength: " + Strength);
+                Console.WriteLine($"Total Defense: {Defense + EquippedArmor.Defense} (+{EquippedArmor.Defense})");
             }
-            else if (this.EquippedShield != null)
+            else if (EquippedShield != null)
             {
                 Console.WriteLine("A Shield equipped");
-                Console.WriteLine("Strength: " + this.Strength);
-                Console.WriteLine($"Total Defense: {this.Defense + this.EquippedShield.Defense} (+{this.EquippedShield.Defense})");
+                Console.WriteLine("Strength: " + Strength);
+                Console.WriteLine($"Total Defense: {Defense + EquippedShield.Defense} (+{EquippedShield.Defense})");
             }
 
 
@@ -111,14 +111,14 @@ namespace OOP_RPG
             Console.WriteLine("*****  INVENTORY ******");
             Console.WriteLine("Weapons: ");
 
-            foreach (var weapon in this.WeaponsBag)
+            foreach (var weapon in WeaponsBag)
             {
                 Console.WriteLine(weapon.Name + " of " + weapon.Strength + " Strength");
             }
 
             Console.WriteLine("Armor: ");
 
-            foreach (var armor in this.ArmorsBag)
+            foreach (var armor in ArmorsBag)
             {
                 Console.WriteLine(armor.Name + " of " + armor.Defense + " Defense");
             }
@@ -126,14 +126,14 @@ namespace OOP_RPG
 
             Console.WriteLine("Shield: ");
 
-            foreach (var shield in this.ShieldsBag)
+            foreach (var shield in ShieldsBag)
             {
                 Console.WriteLine(shield.Name + " of " + shield.Defense + " Defense");
             }
 
             Console.WriteLine("Potions: ");
 
-            foreach (var potion in this.PotionsBag)
+            foreach (var potion in PotionsBag)
             {
                 Console.WriteLine(potion.Name + " of " + potion.HP + " Health Points");
             }
